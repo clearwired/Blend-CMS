@@ -1,0 +1,36 @@
+<dtml-var cms_header>
+<h1>Resource Library</h1>
+<p>Resource Libraries store all of the content on the website. There is a Resource Library for each content type. Select a resource library below to add new content to the website or to edit an existing piece of content.</p>
+<table id="publish">
+<tr>
+	<th>Resource Libraries (total objects)</th>
+</tr>
+<tr class="even">
+	<td><a href="homepage_html">Homepages (<dtml-let counter="_.len(website.objectValues(['Blend Homepage']))"><dtml-var counter></dtml-let>)</a></td>
+</tr>
+<tr>
+	<td><a href="ipage_html">Index Pages (<dtml-let counter="_.len(website.objectValues(['Blend iPage']))"><dtml-var counter></dtml-let>)</a></td>
+</tr>
+<tr class="even">
+	<td><a href="page_html">Pages (<dtml-let counter="_.len(website.objectValues(['Blend Page']))"><dtml-var counter></dtml-let>)</a></td>
+</tr>
+<tr>
+	<td><a href="images_html">Images (<dtml-let counter="_.len(website.images.objectValues(['ExtImage']))"><dtml-var counter></dtml-let>)</a></td>
+</tr>
+<tr class="even">
+	<td><a href="files_html">Documents (<dtml-let counter="_.len(website.files.objectValues(['ExtFile']))"><dtml-var counter></dtml-let>)</a></td>
+</tr>
+<tr>
+	<td><a href="events_html">Events (<dtml-let counter="_.len(website.objectValues(['Blend Event']))"><dtml-var counter></dtml-let>)</a></td>
+</tr>
+<tr class="even">
+	<td><a href="news_html">News (<dtml-let counter="_.len(website.objectValues(['Blend News']))"><dtml-var counter></dtml-let>)</a></td>
+</tr>
+<tr>
+	<td><a href="promos_html">Promos (<dtml-let counter="_.len(website.objectValues(['Blend Promo']))"><dtml-var counter></dtml-let>)</a></td>
+</tr>
+<tr class="even">
+        <td colspan="3"><a href="DB/db_view1">External Data</a></td>
+</tr>
+</table>
+<dtml-var cms_footer>

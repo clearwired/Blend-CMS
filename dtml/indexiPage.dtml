@@ -1,0 +1,12 @@
+<dtml-if expr="_.has_key('template') is False">
+	<dtml-call "_.template == 'default'">
+</dtml-if>
+<dtml-with website>
+	<dtml-with templates>
+		<dtml-call "REQUEST.set('header_html', _.getitem('header_'+template))">
+		<dtml-call "REQUEST.set('footer_html', _.getitem('footer_'+template))">
+	</dtml-with>
+</dtml-with>
+<dtml-var header_html>
+<dtml-var data> 
+<dtml-var footer_html>

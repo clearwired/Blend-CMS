@@ -1,0 +1,5 @@
+<dtml-var "REQUEST.set('file', REQUEST.file)">
+<dtml-var "REQUEST.set('title',REQUEST.title)">
+<dtml-var "REQUEST.set('art_id', REQUEST.id)">
+<dtml-call "context.manage_addProduct['ExtFile'].manage_addExtFile(id=REQUEST['id'],file=file,title=REQUEST['title'])">
+<dtml-var expr="RESPONSE.redirect('../articleUploadSuccess?id=%s' % (REQUEST['art_id']))">

@@ -1,0 +1,44 @@
+<dtml-with REQUEST>
+	<dtml-if pubbed>
+		<dtml-in pubbed prefix="loop">
+			<dtml-in expr="website.objectValues(['Blend iPage'])">
+			<dtml-if expr="loop_item == id">
+				<dtml-var "manage_publishItems(pageobj)">
+			</dtml-if>
+			</dtml-in>
+		</dtml-in>
+		<dtml-call "REQUEST.set('subinsert',1)">
+		<dtml-call "REQUEST.set('sectinsert',0)">
+	<dtml-elif subpub>
+		<dtml-in subpub prefix="loop">
+			<dtml-in expr="website.objectValues(['Blend Page'])">
+			<dtml-if expr="loop_item == id">
+				<dtml-var "manage_publishItems(pageobj)">
+			</dtml-if>
+			</dtml-in>
+		</dtml-in>
+		<dtml-call "REQUEST.set('sectinsert',1)">
+		<dtml-call "REQUEST.set('subinsert',0)">
+	<dtml-else>
+		<dtml-call "RESPONSE.redirect('pagePublish3_html')">
+	</dtml-if>
+</dtml-with>
+
+<dtml-if subinsert>
+	<dtml-if expr="subinsert == 1">
+		<dtml-call "RESPONSE.redirect('pagePublish2_html')">
+	<dtml-elif expr="sectinsert == 1">
+		<dtml-call "RESPONSE.redirect('pagePublish2_html')">
+		<dtml-call "RESPONSE.redirect('pagePublish3_html')">
+	</dtml-if>
+</dtml-if>
+
+<dtml-if sectinsert>
+	<dtml-if expr="subinsert == 1">
+		<dtml-call "RESPONSE.redirect('pagePublish2_html')">
+	<dtml-elif expr="sectinsert == 1">
+		<dtml-call "RESPONSE.redirect('pagePublish2_html')">
+	<dtml-else>
+		<dtml-call "RESPONSE.redirect('pagePublish3_html')">
+	</dtml-if>
+</dtml-if>

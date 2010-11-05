@@ -1,0 +1,7 @@
+-2.5.0
+  * Added tagging for ExtFile and ExtImage (Images and Documents)
+  * Added pagination for resource libraries
+  * Moved configuration for global tags, prefix, suffix, news types, event types to Admin section
+  * Added edit link to last X modified objects in global footer
+  * CSS changes
+

@@ -1,0 +1,157 @@
+<dtml-var cms_header>
+  <script type="text/javascript" charset="utf-8">
+  /*<![CDATA[*/
+  display_error = function (elid, name) 
+  {
+  	$(elid).className = name;
+  }
+  validate_form = function () 
+  {
+  	var no_errors = true;
+
+  	if (!isNotEmpty($F('fname'))) 
+  	{
+  		no_errors = false;
+  		display_error('error_fname', 'error');
+  	} 
+  	else 
+  	{
+  		display_error('error_fname', '');
+  	}
+  	if (!isNotEmpty($F('lname'))) 
+  	{
+  		no_errors = false;
+  		display_error('error_lname', 'error');
+  	} 
+  	else 
+  	{
+  		display_error('error_lname', '');
+  	}
+  	if (!isNotEmpty($F('address'))) 
+  	{
+  		no_errors = false;
+  		display_error('error_address', 'error');
+  	} 
+  	else 
+  	{
+  		display_error('error_address', '');
+  	}
+  	if (!isNotEmpty($F('city'))) 
+  	{
+  		no_errors = false;
+  		display_error('error_city', 'error');
+  	} 
+  	else 
+  	{
+  		display_error('error_city', '');
+  	}
+  	if (!isNotEmpty($F('state'))) 
+  	{
+  		no_errors = false;
+  		display_error('error_state', 'error');
+  	} 
+  	else 
+  	{
+  		display_error('error_state', '');
+  	}
+  	if (!isNotEmpty($F('zip'))) 
+  	{
+  		no_errors = false;
+  		display_error('error_zip', 'error');
+  	} 
+  	else 
+  	{
+  		display_error('error_zip', '');
+  	}
+  	if (!isNotEmpty($F('account_type'))) 
+  	{
+  		no_errors = false;
+  		display_error('error_account_type', 'error');
+  	} 
+  	else 
+  	{
+  		display_error('error_account_type', '');
+  	}
+  	if (!isEmail($F('email'))) 
+  	{
+  		no_errors = false;
+  		display_error('error_email', 'error');
+  	} 
+  	else 
+  	{
+  		display_error('error_email', '');
+  	}
+  	if (!isNotEmpty($F('phone'))) 
+  	{
+  		no_errors = false;
+  		display_error('error_phone', 'error');
+  	} 
+  	else 
+  	{
+  		display_error('error_phone', '');
+  	}
+  	if (!isNotEmpty($F('name'))) 
+  	{
+  		no_errors = false;
+  		display_error('error_name', 'error');
+  	} 
+  	else 
+  	{
+  		display_error('error_name', '');
+  	}
+  	if (!isNotEmpty($F('password'))) 
+  	{
+  		no_errors = false;
+  		display_error('error_password', 'error');
+  	} 
+  	else 
+  	{
+  		display_error('error_password', '');
+  	}
+
+  	if (!no_errors) alert('Please correct the indicated items before continuing.');
+
+  	return no_errors;
+  }
+  /*]]>*/
+  </script>
+  <h2>Add New User</h2>
+  <form name="form" id="form" class="edit" method="post" action="doUpdate" onsubmit="return validate_form();">
+  <dtml-in expr="sqSelectAccount(account_id=account_id)">
+  <input type="hidden" name="account_id" value="<dtml-var account_id>">
+  <input type="hidden" name="account_time" value="<dtml-var account_time>">
+  <input type="hidden" name="account_activate_time" value="<dtml-var account_activate_time>">
+  <fieldset>
+  <label id="error_account_type" for="account_type">Account Type *</label>
+  <select name="account_type" id="account_type" class="account_type">
+    <option value="">--</option>
+    <option value="3" <dtml-if expr="account_account_type==3">selected</dtml-if>>Manager</option>
+    <option value="1"<dtml-if expr="account_account_type==1">selected</dtml-if>>Editor</option>
+  </select>
+  <label id="error_fname" for="fname">First Name *</label>
+  <input type="text" id="fname" class="fname" name="fname" size="20" value="<dtml-var account_fname>">	
+  <label id="error_lname" for="lname">Last Name *</label>
+  <input type="text" id="lname" class="lname" name="lname" size="20" value="<dtml-var account_lname>">	
+  <label id="error_address" for="address">Address *</label>
+  <input type="text" id="address" class="address" name="address" size="45" value="<dtml-var account_address>">
+  <label id="error_city" for="city">City *</label>
+  <input type="text" id="city" class="city" name="city" size="20" value="<dtml-var account_city>">
+  <label id="error_state" for="state">State *</label>
+  <input type="text" id="state" class="state" name="state" size="20" value="<dtml-var account_state>">
+  <label id="error_zip" for="zip">Zip *</label>
+  <input type="text" id="zip" class="zip" name="zip" size="15" value="<dtml-var account_zip>">
+  <label id="error_email" for="email">Email *</label>
+  <input type="text" id="email" class="email" name="email" size="20" value="<dtml-var account_email>">
+  <label id="error_phone" for="phone">Phone *</label>
+  <input type="text" id="phone" class="phone" name="phone" size="20" value="<dtml-var account_phone>">
+  <label id="error_name" for="name">Username *</label>
+  <input type="text" id="name" class="name" name="name" size="20" value="<dtml-var name>">
+  <label id="error_password" for="password">Password *</label>
+  <input type="password" id="password" class="password" name="password" size="20" value="<dtml-var password>">
+  </fieldset>
+  <fieldset>
+          <input type="submit" name="submit" value="Update Account" class="sendit">&nbsp;&nbsp;<a href="<dtml-var base_path>/users_html?size=50" style="color:red; font-size:11px;text-decoration:underline;">Cancel</a>
+  </fieldset>
+  </dtml-in>
+  </form>
+<dtml-var cms_footer>

@@ -1,0 +1,26 @@
+<dtml-var manage_page_header>
+<dtml-var manage_tabs>
+
+<form name="form" action="." method="post">
+<input type="hidden" name="created" value="<dtml-var created>">
+<fieldset>
+
+<legend>Edit Promo Content</legend>
+<p><label for="Last Updated">Last Updated</label><br />
+<dtml-var "bobobase_modification_time(). toZone('US/Eastern')" fmt="%Y/%m/%d - %H:%M"></p>
+
+<p><label for="Promo Id">Promo Id</label><br />
+<input type="text" name="id:string" size="30" readonly="1" value="<dtml-var id>"></p>
+
+<p><label for="Promo Title">Promo Title</label><br />
+<input type="text" name="title:string" size="30" value="<dtml-var title>"></p>
+
+<p><label for="Promo Content">Promo Content</label><br />
+<textarea cols="80" rows="20" id="data" name="data"><dtml-var data></textarea></p>
+
+<p><input type="submit" value="Save Changes" name="manage_editZMI:method"></p>
+
+</fieldset>
+<p>&nbsp;</p>
+</form>
+<dtml-var manage_page_footer>

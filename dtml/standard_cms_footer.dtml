@@ -1,0 +1,300 @@
+</div>
+<div id="rightcol">
+<ul id="sidenav">
+	<li><a href="<dtml-var base_path>/homepage_html" <dtml-if library><dtml-if expr="library=='homepage_html'">id=selected</dtml-if></dtml-if>>Home Pages</a></li>	
+	<li><a href="<dtml-var base_path>/ipage_html?size=50" <dtml-if library><dtml-if expr="library=='ipage_html'">id=selected</dtml-if></dtml-if>>Sections</a></li>
+	<li><a href="<dtml-var base_path>/page_html?size=50" <dtml-if library><dtml-if expr="library=='page_html'">id=selected</dtml-if></dtml-if>>Pages</a></li>
+	<li><a href="<dtml-var base_path>/clusters_html?size=50" <dtml-if library><dtml-if expr="library=='clusters_html'">id=selected</dtml-if></dtml-if>>Clusters</a></li>
+	<li><a href="<dtml-var base_path>/people_html?size=50" <dtml-if library><dtml-if expr="library=='people_html'">id=selected</dtml-if></dtml-if>>People</a></li>
+	<li><a href="<dtml-var base_path>/articles_html?size=50" <dtml-if library><dtml-if expr="library=='articles_html'">id=selected</dtml-if></dtml-if>>Articles</a></li>
+	<li><a href="<dtml-var base_path>/images_html?size=50" <dtml-if library><dtml-if expr="library=='images_html'">id=selected</dtml-if></dtml-if>>Images</a></li>
+	<li><a href="<dtml-var base_path>/files_html?size=50" <dtml-if library><dtml-if expr="library=='files_html'">id=selected</dtml-if></dtml-if>>Documents</a></li>
+	<li><a href="<dtml-var base_path>/events_html?size=50" <dtml-if library><dtml-if expr="library=='events_html'">id=selected</dtml-if></dtml-if>>Events</a></li>
+	<li><a href="<dtml-var base_path>/news_html?size=50" <dtml-if library><dtml-if expr="library=='news_html'">id=selected</dtml-if></dtml-if>>News</a></li>
+	<li><a href="<dtml-var base_path>/promos_html?size=50" <dtml-if library><dtml-if expr="library=='promos_html'">id=selected</dtml-if></dtml-if>>Promos</a></li>
+	<li style="border-top: 1px solid #ccc;"><a href="<dtml-var base_path>/adminNews_html" <dtml-if library><dtml-if expr="library=='adminNews_html'">id=selected</dtml-if></dtml-if>>CMS Alerts</a></li>
+</ul>
+
+
+<dtml-if expr="meta_type=='Blend iPage'">
+<dtml-call "REQUEST.set('page_id',id)">
+<dtml-call "REQUEST.set('containedin',getListItems())">
+		<dtml-in containedin prefix="page">
+		<dtml-if sequence-start><dl><dt>Pages in This Section</dt></dtml-if>
+		<dd><dtml-var "_.getitem(page_item).title_or_id()"> <a href="../<dtml-var "_.getitem(page_item).id">/pageEditCMS">(edit</a> | <a href="../<dtml-var "_.getitem(page_item).id">/pagePublish2_html">manage)</a></dd>
+	</dtml-in>
+	<dtml-in containedin prefix="page">
+	<dtml-if sequence-start></dl></dtml-if>
+</dtml-in>
+<dt>Tagged</dt>
+<dl>
+<dtml-in expr="website.objectValues(['Blend iPage'])">
+	<dtml-if expr="page_id==id">
+	<dtml-let a="_.string.split(tags,'\r')">
+		<dd><dtml-in a prefix=loop><a href="<dtml-var base_path>/mydocs_html?filter=y&tag=<dtml-var expr="displayTags(loop_item)">"><dtml-var expr="scrubTags(loop_item)"></a><br /></dtml-in></dd>
+	</dtml-let>
+	</dtml-if>
+</dtml-in>
+</dl>
+
+<dtml-elif expr="meta_type=='Blend Page'">
+	<dtml-call "REQUEST.set('page_id',id)">
+<dt>Published In</dt>
+<dl>
+<dtml-in expr="website.objectValues(['Blend iPage'])">
+	<dtml-if expr="page_id in container"><dd><dtml-var title_or_id> <a href="../<dtml-var id>/ipageEditCMS">(edit)</a></dd></dtml-if>
+</dtml-in>
+</dl>
+<dt>Tagged</dt>
+<dl>
+<dtml-in expr="website.objectValues(['Blend Page'])">
+	<dtml-if expr="page_id==id">
+	<dtml-let a="_.string.split(tags,'\r')">
+		<dd><dtml-in a prefix=loop><a href="<dtml-var base_path>/mydocs_html?filter=y&tag=<dtml-var expr="displayTags(loop_item)">"><dtml-var expr="scrubTags(loop_item)"></a><br /></dtml-in></dd>
+	</dtml-let>
+	</dtml-if>
+</dtml-in>
+</dl>
+</dtml-if>
+
+
+<dtml-if expr="meta_type=='Blend Promo'">
+	<dtml-call "REQUEST.set('page_id',id)">
+<dt>Tagged</dt>
+<dl>
+<dtml-in expr="website.objectValues(['Blend Promo'])">
+	<dtml-if expr="page_id==id">
+	<dtml-let a="_.string.split(tags,'\r')">
+		<dd><dtml-in a prefix=loop><a href="<dtml-var base_path>/mydocs_html?filter=y&tag=<dtml-var expr="displayTags(loop_item)">"><dtml-var expr="scrubTags(loop_item)"></a><br /></dtml-in></dd>
+	</dtml-let>
+	</dtml-if>
+</dtml-in>
+</dl>
+<dt>Positions</dt>
+<div id="positions">
+<dl>
+<dtml-in expr="website.objectValues(['Blend Promo'])">
+	<dtml-if expr="page_id==id">
+<dd><strong>Home Page</strong></dd>
+<dtml-in expr="website.objectValues(['Blend Homepage'])">
+<dtml-if expr="page_id in hPromoPosA or hPromoPosB or hPromoPosC or hPromoPosD or hPromoPosE or hPromoPosF">
+  <dd>
+  <a href="../<dtml-var id>/homepageEditCMS"><dtml-var title_or_id></a>: 
+  <dtml-if expr="page_id in hPromoPosA">(A)</dtml-if>
+  <dtml-if expr="page_id in hPromoPosB">(B)</dtml-if>
+  <dtml-if expr="page_id in hPromoPosC">(C)</dtml-if>
+  <dtml-if expr="page_id in hPromoPosD">(D)</dtml-if>
+  <dtml-if expr="page_id in hPromoPosE">(E)</dtml-if>
+  <dtml-if expr="page_id in hPromoPosF">(F)</dtml-if>
+  </dd>
+</dtml-if>
+</dtml-in>
+<dd><strong>Sections</strong></dd>
+<dtml-in expr="website.objectValues(['Blend iPage'])">
+<dtml-if expr="page_id in iPromoPosA or iPromoPosB or iPromoPosC or iPromoPosD or iPromoPosE or iPromoPosF">
+  <dd>
+  <a href="../<dtml-var id>/ipageEditCMS"><dtml-var title_or_id></a>: 
+  <dtml-if expr="page_id in iPromoPosA">(A)</dtml-if>
+  <dtml-if expr="page_id in iPromoPosB">(B)</dtml-if>
+  <dtml-if expr="page_id in iPromoPosC">(C)</dtml-if>
+  <dtml-if expr="page_id in iPromoPosD">(D)</dtml-if>
+  <dtml-if expr="page_id in iPromoPosE">(E)</dtml-if>
+  <dtml-if expr="page_id in iPromoPosF">(F)</dtml-if>
+  </dd>
+</dtml-if>
+</dtml-in>
+<dd><strong>Pages</strong></dd>
+<dtml-in expr="website.objectValues(['Blend Page'])">
+<dtml-if expr="page_id in PromoPosA or PromoPosB or PromoPosC or PromoPosD or PromoPosE or PromoPosF">
+  <dd>
+  <a href="../<dtml-var id>/pageEditCMS"><dtml-var title_or_id></a>: 
+  <dtml-if expr="page_id in PromoPosA">(A)</dtml-if>
+  <dtml-if expr="page_id in PromoPosB">(B)</dtml-if>
+  <dtml-if expr="page_id in PromoPosC">(C)</dtml-if>
+  <dtml-if expr="page_id in PromoPosD">(D)</dtml-if>
+  <dtml-if expr="page_id in PromoPosE">(E)</dtml-if>
+  <dtml-if expr="page_id in PromoPosF">(F)</dtml-if>
+  </dd>
+</dtml-if>
+</dtml-in>
+<dd><strong>Clusters</strong></dd>
+<dtml-in expr="website.objectValues(['Blend Cluster'])">
+<dtml-if expr="page_id in iPromoPosA or iPromoPosB or iPromoPosC or iPromoPosD or iPromoPosE or iPromoPosF">
+  <dd>
+  <a href="../<dtml-var id>/clusterEditCMS"><dtml-var title_or_id></a>: 
+  <dtml-if expr="page_id in iPromoPosA">(A)</dtml-if>
+  <dtml-if expr="page_id in iPromoPosB">(B)</dtml-if>
+  <dtml-if expr="page_id in iPromoPosC">(C)</dtml-if>
+  <dtml-if expr="page_id in iPromoPosD">(D)</dtml-if>
+  <dtml-if expr="page_id in iPromoPosE">(E)</dtml-if>
+  <dtml-if expr="page_id in iPromoPosF">(F)</dtml-if>
+  </dd>
+</dtml-if>
+</dtml-in>
+<dd><strong>People</strong></dd>
+<dtml-in expr="website.objectValues(['Blend Person'])">
+<dtml-if expr="page_id in PromoPosA or PromoPosB or PromoPosC or PromoPosD or PromoPosE or PromoPosF">
+  <dd>
+  <a href="../<dtml-var id>/personEditCMS"><dtml-var title_or_id></a>: 
+  <dtml-if expr="page_id in PromoPosA">(A)</dtml-if>
+  <dtml-if expr="page_id in PromoPosB">(B)</dtml-if>
+  <dtml-if expr="page_id in PromoPosC">(C)</dtml-if>
+  <dtml-if expr="page_id in PromoPosD">(D)</dtml-if>
+  <dtml-if expr="page_id in PromoPosE">(E)</dtml-if>
+  <dtml-if expr="page_id in PromoPosF">(F)</dtml-if>
+  </dd>
+</dtml-if>
+</dtml-in>
+	</dtml-if>
+</dtml-in>
+</dl>
+</div><!--end promo positions -->
+<dtml-elif expr="meta_type=='Blend Cluster'">
+	<dtml-call "REQUEST.set('page_id',id)">
+<dt>Tagged</dt>
+<dl>
+<dtml-in expr="website.objectValues(['Blend Cluster'])">
+	<dtml-if expr="page_id==id">
+	<dtml-let a="_.string.split(tags,'\r')">
+		<dd><dtml-in a prefix=loop><a href="<dtml-var base_path>/mydocs_html?filter=y&tag=<dtml-var expr="displayTags(loop_item)">"><dtml-var expr="scrubTags(loop_item)"></a><br /></dtml-in></dd>
+	</dtml-let>
+	</dtml-if>
+</dtml-in>
+</dl>
+<dtml-elif expr="meta_type=='Blend Article'">
+	<dtml-call "REQUEST.set('page_id',id)">
+<dt>Tagged</dt>
+<dl>
+<dtml-in expr="website.objectValues(['Blend Article'])">
+	<dtml-if expr="page_id==id">
+	<dtml-let a="_.string.split(tags,'\r')">
+		<dd><dtml-in a prefix=loop><a href="<dtml-var base_path>/mydocs_html?filter=y&tag=<dtml-var expr="displayTags(loop_item)">"><dtml-var expr="scrubTags(loop_item)"></a><br /></dtml-in></dd>
+	</dtml-let>
+	</dtml-if>
+</dtml-in>
+</dl>
+<dtml-elif expr="meta_type=='Blend Person'">
+	<dtml-call "REQUEST.set('page_id',id)">
+<dt>Tagged</dt>
+<dl>
+<dtml-in expr="website.objectValues(['Blend Person'])">
+	<dtml-if expr="page_id==id">
+	<dtml-let a="_.string.split(tags,'\r')">
+		<dd><dtml-in a prefix=loop><a href="<dtml-var base_path>/mydocs_html?filter=y&tag=<dtml-var expr="displayTags(loop_item)">"><dtml-var expr="scrubTags(loop_item)"></a><br /></dtml-in></dd>
+	</dtml-let>
+	</dtml-if>
+</dtml-in>
+</dl>
+<dtml-elif expr="meta_type=='Blend Event'">
+	<dtml-call "REQUEST.set('page_id',id)">
+<dt>Tagged</dt>
+<dl>
+<dtml-in expr="website.objectValues(['Blend Event'])">
+	<dtml-if expr="page_id==id">
+	<dtml-let a="_.string.split(tags,'\r')">
+		<dd><dtml-in a prefix=loop><a href="<dtml-var base_path>/mydocs_html?filter=y&tag=<dtml-var expr="displayTags(loop_item)">"><dtml-var expr="scrubTags(loop_item)"></a><br /></dtml-in></dd>
+	</dtml-let>
+	</dtml-if>
+</dtml-in>
+</dl>
+<dtml-elif expr="meta_type=='Blend News'">
+	<dtml-call "REQUEST.set('page_id',id)">
+<dt>Tagged</dt>
+<dl>
+<dtml-in expr="website.objectValues(['Blend News'])">
+	<dtml-if expr="page_id==id">
+	<dtml-let a="_.string.split(tags,'\r')">
+		<dd><dtml-in a prefix=loop><a href="<dtml-var base_path>/mydocs_html?filter=y&tag=<dtml-var expr="displayTags(loop_item)">"><dtml-var expr="scrubTags(loop_item)"></a><br /></dtml-in></dd>
+	</dtml-let>
+	</dtml-if>
+</dtml-in>
+</dl>
+<dtml-elif expr="meta_type=='Blend Admin News'">
+	<dtml-call "REQUEST.set('page_id',id)">
+<dt>Tagged</dt>
+<dl>
+<dtml-in expr="website.objectValues(['Blend Admin News'])">
+	<dtml-if expr="page_id==id">
+	<dtml-let a="_.string.split(tags,'\r')">
+		<dd><dtml-in a prefix=loop><a href="<dtml-var base_path>/mydocs_html?filter=y&tag=<dtml-var expr="displayTags(loop_item)">"><dtml-var expr="scrubTags(loop_item)"></a><br /></dtml-in></dd>
+	</dtml-let>
+	</dtml-if>
+</dtml-in>
+</dl>
+</dtml-if>
+<dtml-let x="_.string.replace(URL0,'/',' ')">
+				<dtml-let z="_.string.split(x,' ')">
+					<dtml-let manageobj="z[-1]">
+						<dtml-call "REQUEST.set ('themobj', manageobj)">
+					</dtml-let>
+				</dtml-let>
+</dtml-let>
+</div>
+
+<div id="foot">
+<div class="footer">
+<table id="lib" class="data sortable" border="0" cellpadding="0" cellspacing="0">
+<dtml-in expr="website.objectValues(['Blend iPage', 'Blend Page', 'Blend News', 'Blend Event', 'ExtImage', 'ExtFile', 'Blend Promo','Blend Article','Blend Person','Blend Person'])" sort=bobobase_modification_time reverse size=15 start=start>
+	<dtml-if sequence-start>
+	<h3>Last 15 Modified Objects</h3>
+		<tr>
+		<th>Title</th>
+		<th>Type</th>
+		<th>Modified</th>
+		<th>Edit</th>
+		</tr>
+		</dtml-if>
+			<dtml-if sequence-even>
+			<tr class="even">
+		<dtml-else>
+			<tr class="odd">
+		</dtml-if>
+		<td><dtml-let pagetitle="_['title_or_id'][:30]"><dtml-var pagetitle></dtml-let></td>
+		<td><dtml-if expr="meta_type == 'Blend iPage'">Section<dtml-else><dtml-var meta_type></dtml-if></td>
+		<td><dtml-var "bobobase_modification_time(). toZone(timezone)" fmt=fCommon></td>
+		<dtml-if expr="meta_type=='Blend Page'">
+		<td class="button"><a href="website/<dtml-var id>/pageEditCMS"><img src="/misc_/Blend/edit" height="16" width="16" border="0" alt="Edit Document"></a></td>
+		<dtml-elif expr="meta_type=='Blend iPage'">
+		<td class="button"><a href="website/<dtml-var id>/ipageEditCMS"><img src="/misc_/Blend/edit" height="16" width="16" border="0" alt="Edit Document"></a></td>
+		<dtml-elif expr="meta_type=='Blend Event'">
+		<td class="button"><a href="website/<dtml-var id>/eventEditCMS"><img src="/misc_/Blend/edit" height="16" width="16" border="0" alt="Edit Document"></a></td>
+		<dtml-elif expr="meta_type=='Blend News'">
+		<td class="button"><a href="website/<dtml-var id>/newsEditCMS"><img src="/misc_/Blend/edit" height="16" width="16" border="0" alt="Edit Document"></a></td>
+		<dtml-elif expr="meta_type=='Blend Promo'">
+		<td class="button"><a href="website/<dtml-var id>/promoEditCMS"><img src="/misc_/Blend/edit" height="16" width="16" border="0" alt="Edit Document"></a></td>
+		<dtml-elif expr="meta_type=='Blend Admin News'">
+		<td class="button"><a href="website/<dtml-var id>/adminNewsEditCMS"><img src="/misc_/Blend/edit" height="16" width="16" border="0" alt="Edit Document"></a></td>
+		<dtml-elif expr="meta_type=='Blend Person'">
+		<td class="button"><a href="website/<dtml-var id>/personEditCMS"><img src="/misc_/Blend/edit" height="16" width="16" border="0" alt="Edit Document"></a></td>
+		<dtml-elif expr="meta_type=='Blend Article'">
+		<td class="button"><a href="website/<dtml-var id>/articleEditCMS"><img src="/misc_/Blend/edit" height="16" width="16" border="0" alt="Edit Document"></a></td>
+		<dtml-elif expr="meta_type=='Blend Cluster'">
+		<td class="button"><a href="website/<dtml-var id>/clusterEditCMS"><img src="/misc_/Blend/edit" height="16" width="16" border="0" alt="Edit Document"></a></td>
+		</dtml-if>
+		</tr>
+	</dtml-in>
+	</table>
+</div>
+<div class="footer right">
+	<p><strong><dtml-var title_or_id></strong><br />
+	<dtml-with aq_parent>
+		<dtml-var clientaddress><br />
+		<dtml-var clientcity>, <dtml-var clientstate> <dtml-var clientzip>
+	  </p>
+	  <p>tel 1: <dtml-var clientphone1><br />
+	     tel 2: <dtml-var clientphone2><br />
+	     email: <a href="mailto: <dtml-var clientemail>" style="text-decoration:underline;"><dtml-var clientemail></a></p>
+	</dtml-with>
+	<hr />
+	<p class="blend_powered"><a href="http://www.clearwired.com/"><img src="/misc_/Blend/logo" alt="Blend Powered" title="Blend Powered"></a></p>
+</div>
+	<div id="copyright">
+		<p>&copy; 2004 - 2009 Clearwired Web Services, LLC. All Rights Reserved.</p>
+	</div>	
+</div>
+	
+	</div>
+</div>
+	</body>
+	<dtml-var REQUEST>
+</html>

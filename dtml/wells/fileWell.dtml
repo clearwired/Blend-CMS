@@ -1,0 +1,78 @@
+<dtml-var cms_header>
+<h2>Documents</h2>
+<p>This resource library contains all of the documents that have been added to Blend.  Documents may be added to the resource library and then linked to text within pages and index pages by first selecting the text, then clicking on the toolbox icon in the HTML editor and finally selecting the file that you would like to link. To upload a new document,  browse for the document on your local hard drive and then click the upload button.  Typical document types include MS Word, Adobe Acrobat, MS Excel.  See the <a href="help_html">Blend User Manual</a> for additional information about working with documents in Blend.</p>
+<div id="addcontent">
+<form name="fileupload" method="POST" action="website/files/addFile" enctype="multipart/form-data">
+<input type="hidden" name="id" value="">
+<input type="file" name="file" class="add"><input type="submit" class="add" name="save" value="Upload" />
+</form>
+</div>
+
+
+<div id="batchwrap">
+<form name="" action="../blend/files_html?size=<dtml-var size>" method="post">
+<dtml-call "REQUEST.set('bsize',size)">
+<dtml-in expr="website.files.objectValues(['ExtFile'])" sort=title_or_id size=size start=start>
+	<dtml-if sequence-start>
+		<dtml-if previous-sequence>
+		<div id="batchlink">&laquo; <a href="<dtml-var sequence-query>start=<dtml-var previous-sequence-start-number>">Prev</a> 
+		<dtml-else>
+		<div id="batchlink">
+		</dtml-if>
+	</dtml-if>
+<dtml-if sequence-end>
+  <dtml-if start><dtml-var start><dtml-else>1</dtml-if> - <dtml-var sequence-number> / <span class="batches"><dtml-let counter="_.len(website.files.objectValues(['ExtFile']))"><dtml-var counter></dtml-let></span>
+	<dtml-if next-sequence>
+	  <a href="../blend/files_html?size=<dtml-var bsize>&start=<dtml-var next-sequence-start-number>" class="ba_link">Next</a> &raquo;</div>
+	<dtml-else>
+	</div>
+	</dtml-if>
+</dtml-if>
+</dtml-in>
+
+
+<div id="selectsize">
+ Show
+<select name="size" onchange="this.form.submit();">
+<option value="5"<dtml-if expr="size=='5'"> selected</dtml-if>>  5 
+<option value="10"<dtml-if expr="size=='10'"> selected</dtml-if>> 10 
+<option value="20"<dtml-if expr="size=='20'"> selected</dtml-if>> 20 
+<option value="35"<dtml-if expr="size=='35'"> selected</dtml-if>> 35 
+<option value="50"<dtml-if expr="size=='50'"> selected</dtml-if>> 50 
+<option value="100"<dtml-if expr="size=='100'"> selected</dtml-if>>100 
+</select>
+</div>
+</div>
+</form>
+
+<dtml-in expr="website.files.objectValues(['ExtFile'])" sort=title_or_id size=size start=start>
+<dtml-if sequence-start>
+<table id="lib" class="data sortable" cellpadding="0" cellspacing="0" border="0">
+<tr>
+    <th>Document Name</th>
+    <th>Size</th>
+    <th>Type</th>    
+    <th>Added</th>
+    <th class="controls">View</th>
+    <th class="controls">Edit</th>    
+    <th class="controls"><dtml-if "AUTHENTICATED_USER.has_role(['Manager'])">Delete</dtml-if></th>    
+</tr>
+</dtml-if>
+
+	<dtml-if sequence-even>
+		<tr class="even">
+	<dtml-else>
+		<tr class="odd">
+	</dtml-if>
+       <td><a href="website/files/<dtml-var id>" title="<dtml-var title_or_id>"><dtml-let pagetitle="_['title_or_id'][:30]"><dtml-var pagetitle></dtml-let></td>
+       <td><dtml-var size></td>
+       <td><dtml-let filetype="_['getContentType'][12:]"><dtml-var filetype></dtml-let></td>       
+       <td><dtml-var "bobobase_modification_time(). toZone(timezone)" fmt="fCommon"></td>
+       <td class="button"><a href="website/files/<dtml-var id>"><img src="/misc_/Blend/viewit" height="16" width="16" border="0" alt="View Document"></a></td>
+       <td class="button"><a href="website/files/<dtml-var id>/fileEditCMS?id=<dtml-var id>"><img src="/misc_/Blend/edit" height="16" width="16" border="0" alt="Edit Document"></a></td>
+       <td class="button"><dtml-if "AUTHENTICATED_USER.has_role(['Manager'])"><a href="website/files/<dtml-var id>/deleteFile?id=<dtml-var id>" onClick="return confirmSubmit()"><img src="/misc_/Blend/delete" height="16" width="16" border="0" alt="Delete Document"></a></dtml-if></td>
+	</tr>
+
+</dtml-in>
+</table>
+<dtml-var cms_footer>

@@ -1,0 +1,3 @@
+<dtml-var "REQUEST.set('file', REQUEST.file)">
+<dtml-call "context.manage_addProduct['ExtFile'].manage_addExtFile(id=REQUEST['id'],file=file)">
+<dtml-call "RESPONSE.redirect('../../files_html?size=50')">

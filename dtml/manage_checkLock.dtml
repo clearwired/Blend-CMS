@@ -1,0 +1,5 @@
+<dtml-if expr="locked==0">
+ <a href="lockId"><img src="/misc_/Blend/unlock" height="16" width="16" border="0" alt="Unlock Id"></a>
+<dtml-elif expr="locked==1">
+ <a href="unlockId"><img src="/misc_/Blend/lock" height="16" width="16" border="0" alt="Lock Id"></a>
+</dtml-if>

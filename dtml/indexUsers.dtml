@@ -1,0 +1,3 @@
+<dtml-var cms_header>
+<h2>Manage Blend Users</h2>
+<dtml-var cms_footer>

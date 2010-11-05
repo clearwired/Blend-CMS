@@ -1,0 +1,3 @@
+<dtml-call expr="website.files.manage_delObjects(REQUEST['id'])">
+<dtml-call expr="RESPONSE.redirect('../../files_html?size=50')">
+

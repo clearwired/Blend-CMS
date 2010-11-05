@@ -1,0 +1,16 @@
+<dtml-with idx>
+	<dtml-with REQUEST>
+		<dtml-call "REQUEST.set('thepageid',id)">
+	</dtml-with>
+		<dtml-in expr="website.objectValues(['Blend Page'])">
+				<dtml-if expr="idx == id">
+			<dtml-let counter="_.len(getListItems())">
+				<dtml-in expr="_.range(counter)" prefix="num">
+				<dtml-call "REQUEST.set('list_id',num_item)">
+				</dtml-in>
+			</dtml-let>
+			<dtml-var "moveItemBottom(thepageid)">
+			<dtml-call expr="RESPONSE.redirect('../pagePublish4_html?secid=%s' % secid)">
+			</dtml-if>
+		</dtml-in>	
+</dtml-with>

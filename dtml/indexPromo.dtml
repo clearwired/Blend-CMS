@@ -1,0 +1,5 @@
+<dtml-var orphan_html_header>
+<dtml-if data>
+<dtml-var data>
+</dtml-if>
+<dtml-var orphan_html_footer>

@@ -1,0 +1,48 @@
+<dtml-var publish_header>
+<h2>Manage Primary &amp; Secondary Navigation</h2>
+<p>To manage tertiary or fourth level navigation, click "manage" to view full section navigation.</p>
+<div id="publish_container">
+	<table id="lib" class="data" cellpadding="0" cellspacing="0" border="0" style="margin-bottom:0;">
+		<tr>
+			<th style="width:50%">Section Title</th>
+			<th class="controls">Top</th>
+			<th class="controls">Bottom</th>
+			<th class="controls">Up One</th>
+			<th class="controls">Down One</th>
+			<th class="controls">Remove</th>
+		</tr>
+	</table>
+<dtml-in expr="website.objectValues(['Blend iPage'])" sort=disPos>
+<dtml-call "REQUEST.set('idx',id)">
+<h3><dtml-var title_or_id> <a href="../<dtml-var id>/pagePublish4_html?secid=<dtml-var id>" class="view">(manage section)</a></h3>
+<table id="lib" class="data" cellpadding="0" cellspacing="0" border="0">
+  <dtml-in "getListItems()" prefix="loop">
+
+	<dtml-if sequence-even>
+		<tr class="even">
+	<dtml-else>
+		<tr class="odd">
+	</dtml-if>
+
+       <td style="width:50%"><dtml-with "_.getitem(_['loop_item'])"><dtml-var title_or_id></dtml-with></td>
+       <td class="controls"><a href="<dtml-var loop_item>/doMoveTop?id=<dtml-var loop_item>&idx=<dtml-var idx>&lpos:int=<dtml-var loop_index>"><img src="/misc_/Blend/top"alt="View Document"></a></td>
+       <td class="controls"><a href="<dtml-var loop_item>/doMoveBottom?id=<dtml-var loop_item>&idx=<dtml-var idx>"><img src="/misc_/Blend/bottom" height="16" width="16" border="0" alt="View Document"></a></td>
+       <td class="controls"><dtml-if expr="loop_index > 0"><a href="<dtml-var loop_item>/doMoveUp?id=<dtml-var loop_item>&idx=<dtml-var idx>&lpos:int=<dtml-var loop_index>"></dtml-if><img src="/misc_/Blend/up"alt="View Document"></a></td>
+       <td class="controls"><dtml-if loop_end><img src="/misc_/Blend/down" alt="View Document"><dtml-else><a href="<dtml-var loop_item>/doMoveDown?id=<dtml-var loop_item>&idx=<dtml-var idx>&lpos:int=<dtml-var loop_index>"><img src="/misc_/Blend/down" alt="View Document"></a></dtml-if></td>
+       <td class="controls"><a href="<dtml-var loop_item>/doRemove?id=<dtml-var loop_item>&idx=<dtml-var idx>"><img src="/misc_/Blend/remove" alt="View Document"></a></td>       
+    </tr>
+  </dtml-in>
+ </table>
+</dtml-in>
+<table id="lib" class="data" cellpadding="0" cellspacing="0" border="0" style="margin-top:10px;">
+	<tr>
+		<th style="width:50%">Section Title</th>
+		<th class="controls">Top</th>
+		<th class="controls">Bottom</th>
+		<th class="controls">Up One</th>
+		<th class="controls">Down One</th>
+		<th class="controls">Remove</th>
+	</tr>
+</table>
+</div>
+<dtml-var cms_footer>

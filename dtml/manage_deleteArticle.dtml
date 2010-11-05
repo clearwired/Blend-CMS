@@ -1,0 +1,2 @@
+<dtml-call "manage_delObjects([REQUEST['id']])">
+<dtml-call expr="RESPONSE.redirect(URL3 + '/articles_html?size=50')">

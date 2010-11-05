@@ -1,0 +1,46 @@
+<html>
+<title>
+<head></head>
+<body onLoad="document.forms[0].submit()">
+<div style="visibility:hidden;">
+<dtml-with REQUEST>
+<dtml-if expr="metatype=='CMS iPage'">
+<form name="form" action="website/manage_addProduct/Blend/manage_addiPageAction" method="post">
+<input type="hidden" name="data" value="">
+<p style="font-size:10px;"><label for="ID"><span class="required">*</span>New iPage Title: </label>
+<input type="text" name="id:string" size="30" maxlength="25" value="<dtml-var id>" style="font-size:9px;"><input type="submit" value=" Add "></p>
+</form>
+<dtml-elif expr="metatype=='CMS Page'">
+<form name="form" action="website/manage_addProduct/Blend/manage_addPageAction" method="post">
+<input type="hidden" name="data" value="">
+<input type="hidden" name="id:string" size="30" maxlength="25" value="<dtml-var id>" style="font-size:9px;"><input type="submit" value=" Add "></p>
+</form>
+<dtml-elif expr="metatype=='CMS Homepage'">
+<form name="form" action="website/manage_addProduct/Blend/manage_addHomepageAction" method="post">
+<input type="hidden" name="data" value="">
+<p style="font-size:10px;"><label for="ID"><span class="required">*</span>New Homepage Title: </label>
+<input type="text" name="id:string" size="30" maxlength="25" value="<dtml-var id>" style="font-size:9px;"><input type="submit" value=" Add "></p>
+</form>
+<dtml-elif expr="metatype=='CMS Event'">
+<form name="form" action="website/manage_addProduct/Blend/manage_addEventAction" method="post">
+<input type="hidden" name="data" value="">
+<p style="font-size:10px;"><label for="ID"><span class="required">*</span>New Event Title: </label>
+<input type="text" name="id:string" size="30" maxlength="25" value="<dtml-var id>" style="font-size:9px;"><input type="submit" value=" Add "></p>
+</form>
+<dtml-elif expr="metatype=='CMS News'">
+<form name="form" action="website/manage_addProduct/Blend/manage_addNewsAction" method="post">
+<input type="hidden" name="data" value="">
+<p style="font-size:10px;"><label for="ID"><span class="required">*</span>New News Item Title: </label>
+<input type="text" name="id:string" size="30" maxlength="25" value="<dtml-var id>" style="font-size:9px;"><input type="submit" value=" Add "></p>
+</form>
+<dtml-elif expr="metatype=='CMS Promo'">
+<form name="form" action="website/manage_addProduct/Blend/manage_addPromoAction" method="post">
+<input type="hidden" name="data" value="">
+<p style="font-size:10px;"><label for="ID"><span class="required">*</span>New Promo Title: </label>
+<input type="text" name="id:string" size="30" maxlength="25" value="<dtml-var id>" style="font-size:9px;"><input type="submit" value=" Add "></p>
+</form>
+</dtml-if>
+</dtml-with>
+</div>
+</body>
+</html>

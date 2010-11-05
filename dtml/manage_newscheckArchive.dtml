@@ -1,0 +1,5 @@
+<dtml-if expr="archive==0">
+<a href="website/<dtml-var id>/manage_archive"><img src="/misc_/Blend/unpublished" height="16" width="16" border="0" alt="Activate News"></a>
+<dtml-elif expr="archive==1">
+<a href="website/<dtml-var id>/manage_unarchive"><img src="/misc_/Blend/published" height="16" width="16" border="0" alt="Disactivate News"></a>
+</dtml-if>

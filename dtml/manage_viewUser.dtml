@@ -1,0 +1,9 @@
+<dtml-var cms_header>
+<dtml-in expr="sqSelectAccount(account_id=account_id)">
+  <p style="text-align:right;text-decoration:underline;"><a href="editUser_html?account_id=<dtml-var account_id>">Edit User Account &raquo;</a></p>
+  <h2 style="margin-left:5px;"><dtml-var account_fname> <dtml-var account_lname> (<dtml-if expr="account_account_type == 3">Manager<dtml-elif expr="account_account_type == 1">Editor</dtml-if>)</h2>
+  <p>Created: <dtml-var account_time></p>
+  <p><dtml-var account_address><br /><dtml-var account_city>, <dtml-var account_state> <dtml-var account_zip></p>
+  <p>Contact: <dtml-var account_phone>, <a href="mailto:<dtml-var account_email>"><dtml-var account_email></a></p>
+</dtml-in>
+<dtml-var cms_footer>

@@ -1,0 +1,16 @@
+<dtml-var cms_header>
+		    <form name="form" action="manage_addiPageAction" method="post">
+		    <fieldset>
+		    <legend>Add New CS Page</legend>
+		    <p style="text-align:right;"><span class="required">*</span><span class="note">Indicates a required field.</span></p>
+		    <input type="hidden" name="data" value="">
+		    <p><label for="ID"><strong><span class="required">*</span>ID</strong></label><br />
+		    <input type="text" name="id:string" size="30" maxlength="25" value="Add Page ID" onFocus="clearDefault(this)"> <span class="note">An ID cannot contain any of the following characters: \/:*?"<>|</span></p>
+		    <p><label for="Title"><strong>Title</strong></label><br />
+		    <input type="text" name="title:string" size="30" maxlength="25" value="Add Page Title" onFocus="clearDefault(this)"> <span class="note">A CS Page will be identified by its Title.</span></p>
+		    <br />
+		    <input type="submit" value=" Add Blend Page " style="margin-left:10px;">
+		    </fieldset>
+		    <br />
+		    </form>
+<dtml-var cms_footer>

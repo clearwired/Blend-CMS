@@ -1,0 +1,23 @@
+<dtml-var cms_header>
+<h2>Help &amp; Training</h2>
+<p>Below you will find a series of help &amp; training movies that will teach you about the various features of the Clearwired Content Manager.  Movies are organized by general topic to more specific topics encompassing many features and tasks common to managing a website through the CMS.</p>
+<p>The movies require Macromedia Flash Player 7 to view. The latest version of the free Flash player can be downloaded <a href="http://www.macromedia.com/shockwave/download/download.cgi?P1_Prod_Version=ShockwaveFlash" target="_blank">here.</a></p>
+
+<table id="lib" class="data sortable">
+<tr>
+    <th colspan="2">Content Manager Basics</th>
+</tr>
+    <tr class="even">
+       <td>Logging In and Logging Out</td>
+       <td><a href="">Watch Movie</a> (2min 35sec, 3.5mb)</td>
+    </tr>
+    <tr>
+       <td>Interface &amp; Navigation</td>
+       <td><a href="">Watch Movie</a> (2min 35sec, 3.5mb)</td>
+    </tr>
+    <tr class="even">
+       <td>Managing Users: Roles &amp; Permissions</td>
+       <td><a href="">Watch Movie</a> (2min 35sec, 3.5mb)</td>
+    </tr>
+</table>
+<dtml-var cms_footer>

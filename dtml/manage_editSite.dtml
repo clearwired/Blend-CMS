@@ -1,0 +1,76 @@
+<dtml-call "REQUEST.set('timelist', ['US/Pacific', 'US/Mountain', 'US/Central','US/Eastern'])">
+<dtml-var cms_header>
+<form name="form" class="edit" action="." method="post">
+<input type="hidden" name="metakeywords" value="<dtml-var metakeywords>">
+<input type="hidden" name="metadescription" value="<dtml-var metadescription>">
+
+<fieldset class="top">
+<label for="title">*Client Name:</label>
+<input type="text" class="title" name="title:string" size="65"id="title" value="<dtml-var title>"/>
+</fieldset>
+<h3 onClick="expandcontent(this,'sc1')"><span class="showstate"></span>Client Information</h3>
+<fieldset>
+<div id="sc1" class="switchcontent">
+
+<label id="error_clientaddress" for="clientaddress">Address</label>
+<input type="text" name="clientaddress:string" id="clientaddress" size="30" value="<dtml-var clientaddress>">
+
+<label id="error_clientcity" for="clientcity">City</label>
+<input type="text" name="clientcity:string" id="clientcity" size="30" value="<dtml-var clientcity>">
+
+<label id="error_clientstate" for="clientstate">State</label>
+<input type="text" name="clientstate:string" id="contactname" size="30" value="<dtml-var clientstate>">
+
+<label id="error_clientzip" for="clientzip">Zip</label>
+<input type="text" name="clientzip:string" id="clientzip" size="30" value="<dtml-var clientzip>">
+  
+<label id="error_clientphone1" for="clientphone1">Primary Contact Phone</label>
+<input type="text" name="clientphone1:string" id="clientphone1" size="30" value="<dtml-var clientphone1>">
+  
+<label id="error_clientphone2" for="clientphone2">Secondary Contact Phone</label>
+<input type="text" name="clientphone2:string" id="clientphone2" size="30" value="<dtml-var clientphone2>">
+  
+<label id="error_clientemail" for="clientemail">Contact Email</label>
+<input type="text" name="clientemail:string" id="clientemail" size="30" value="<dtml-var clientemail>">
+</div>
+</fieldset>
+
+<h3 onClick="expandcontent(this,'sc2')"><span class="showstate"></span>Configuration</h3>
+<fieldset>
+<div id="sc2" class="switchcontent">
+<label id="error_eventTypes" for="eventTypes">Event Types (one per line)</label>
+<textarea name="eventTypes" cols="80" rows="5"><dtml-var expr="scrubTags(eventTypes)"></textarea>
+<label id="error_newsTypes" for="newsTypes">News Types (one per line)</label>
+<textarea name="newsTypes" cols="80" rows="5"><dtml-var expr="scrubTags(newsTypes)"></textarea>
+<label id="error_clusterTypes" for="clusterTypes">Cluster Types (one per line)</label>
+<textarea name="clusterTypes" cols="80" rows="5"><dtml-var expr="scrubTags(clusterTypes)"></textarea>
+<label id="error_workGroups" for="workGroups">Person Work Groups (one per line)</label>
+<textarea name="workgroup" cols="80" rows="5"><dtml-var expr="scrubTags(workgroup)"></textarea>
+<label id="error_prefix" for="prefix">Person Title Prefixes (one per line)</label>
+<textarea name="prefix" cols="80" rows="5"><dtml-var expr="scrubTags(prefix)"></textarea>
+<label id="error_suffix" for="suffix">Person Title Suffixes (one per line)</label>
+<textarea name="suffix" cols="80" rows="5"><dtml-var expr="scrubTags(suffix)"></textarea>
+
+
+
+<label id="error_siteTags" for="siteTags">Global Tags (one per line)</label>
+<textarea name="siteTags" cols="80" rows="5"><dtml-var expr="scrubTags(siteTags)"></textarea>
+</div>
+</fieldset>
+
+<h3 onClick="expandcontent(this,'sc3')"><span class="showstate"></span>Timezone</h3>
+<fieldset>
+<div id="sc3" class="switchcontent">
+<select name="timezone">
+		<option value="">--Please Select--</option>
+		<dtml-in timelist prefix="loop">
+	    <option value="<dtml-var loop_item>" <dtml-if expr="timezone==loop_item">selected</dtml-if>><dtml-var loop_item></option>
+		</dtml-in>
+	</select>
+	</div>
+  </fieldset>
+<fieldset>
+<input type="submit" value="Save" name="manage_editSaveAction:method">
+</fieldset>
+</form>
+<dtml-var cms_footer>

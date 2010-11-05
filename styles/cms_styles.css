@@ -1,0 +1,181 @@
+/*
+-----------------------------------------------
+project:  Blend CPS base screen style
+version:  February 2007
+----------------------------------------------- */
+
+/* Page Structure
+----------------------------------------------- */
+:link,:visited { text-decoration:none }
+ul,ol { list-style:none }
+h2,h3,h4,h5,h6,pre,code { font-size:1em;}
+ul,ol,li,h1,h2,h3,h4,h5,h6,pre,form,body,html,p,blockquote,fieldset,input,dl,dt,dd
+{ margin:0; padding:0 }	
+a img,:link img,:visited img { border:none }
+address { font-style:normal }
+
+/* Main Styles */
+body{background-color: #E1E6FA;margin:0;font-family: verdana;font-size: small;}
+a {color:#183152;}
+a:hover {text-decoration: underline;}
+p{margin: 0 6px 16px 6px;}
+
+/* Layout */
+#head{background-color: #183152;padding: 10px;height: 30px;}		
+#foot{clear: left;background-color:#ABC8E2;}
+#wrap{margin: 10px; width: 980px; clear: left;}
+#content{background-color: #C4D7ED;clear: left;padding-top: 10px;}	
+#leftcol{background-color:#fff; margin: 10px 0 20px 10px; padding: 10px; width: 700px;float:left;}
+#rightcol{margin: 10px 10px 0 742px;}
+#copyright{clear:left;background-color:#E1E6FA;padding: 0 20px 20px 20px;color: #000;text-align: right;}
+#copyright p {font-size: 10px;}
+
+/* Headers */   
+h1, h2, h3, h4, h5, h6 {font-family: Trebuchet MS, Tahoma, Verdana, sans-serif;color: #222;}
+h1 a {font-weight:normal; font-size: 120%; color: #DCDCDC; text-decoration:none;}
+h1 a:visited {font-weight:normal; color:#DCDCDC; text-decoration:none;}
+h2{margin: 10px 0; font-size: 160%;}
+h2 span{font-size: 80%;}
+h3{margin: 14px 0 0 0; font-size: 120%;background-color: #375D81; padding: 4px;color:#fff;}
+h3 a{margin-left: 6px;font-size: 70%;}
+h3 a.view {color:#FFFFFF;text-decoration:underline;} 
+
+/* Header Utility Navigation */
+ul#utilnav {margin-left: 780px;margin-top: 10px;}
+ul#utilnav li {display: inline;margin: 0 2px;border-right: 1px #222 solid;padding-right: 10px;}
+ul#utilnav li.noborder {border-right: none;}
+ul#utilnav li a {color: #222;font-size: 90%;}
+
+/* Admin Blog Utility Navigation */
+ul#blognav {margin-left: 5px;margin-top: 10px; padding-bottom: 20px; border-bottom: 1px solid #ccc;}
+ul#blognav li {display: inline;margin: 0 2px;border-right: 1px #222 solid;padding-right: 10px;}
+ul#blognav li.noborder {border-right: none;}
+ul#blognav li a {color: #222;font-size: 90%;}
+
+/* Tab Navigation */
+#navlist{margin:0px;padding:0px;}
+#navlist ul, #navlist li{margin: 0;padding: 0;display: inline;list-style-type: none;}
+#navlist li{float: left;}
+#navlist a:link, #navlist a:visited{display:block;float: left;color: #222;padding: 4px 10px 6px 10px;font-size: 120%;}
+#navlist a:link#current, #navlist a:visited#current, #navlist a:hover{background-color:#C4D7ED;text-decoration: none;font-size: 120%;font-weight: bold;}
+#navlist a:hover {font-weight:normal;}
+
+/* Table Styles (work area) */
+table#lib {width: 100%;text-align: left; color: #333;border: #375D81 1px solid;border-bottom-width: 4px;font-size:86%;}
+table#lib caption {text-align: left;}
+table#lib th {background-color: #ABC8E2;padding: 6px;font-size:96%; color: #333333;}
+table#lib th.controls {background-color: #ABC8E2;padding: 6px;font-size:96%; color: #333333; text-align:center;}
+table#lib td {padding: 3px 6px;}
+table#lib td.button, table.data th.center {text-align: center;}
+table#lib tr.even td {border-bottom: 1px solid #E1E6FA;}
+table#lib tr.odd td {border-bottom: 1px solid #E1E6FA;}
+table#lib td span {font-size: 90%;}	
+
+table.data tr.over td, table.data tr:hover td {background: #E1E6FA;}
+
+table.tertiary {width: 100%;text-align: left; color: #333;font-size:96%;margin-left:15px;}
+table.tertiary caption {text-align: left;}
+table.tertiary th {background-color: #CFD2C5;padding: 6px;font-size:96%; color: #4C4E45;}
+table.tertiary th.controls {background-color: #CFD2C5;padding: 6px;font-size:96%; color: #4C4E45; text-align:center;}
+table.tertiary td {padding: 3px 6px;}
+table.tertiary td.button, table.data th.center {text-align: center;}
+table.tertiary tr.even td {background-color: #ECEDE8;}
+table.tertiary tr.odd td {background-color: #cccccc;}
+table.tertiary td span {font-size: 90%;}
+
+#batchwrap {width:100%;height:40px;border-top:1px solid #ABC8E2;}
+#batchlink {width:567px; height:19px;float:left; margin-top:8px; font-size:11px;text-align:right;}
+#selectsize {width:100px;float:left;margin-top:5px;margin-left:10px;padding-left:10px;text-align:right;font-size:11px;border-left:1px solid #ABC8E2;}
+#selectsize select {font-size:11px;}
+.batches {font-size:11px;}
+.ba_link {text-decoration:underline;}
+
+
+
+/* Side Column */	
+dl{background-color: #E1E6FA;padding: 4px;margin-bottom: 10px;}
+dt{padding:2px 4px; font-weight: bold;color:#FFFFFF;background-color: #183152;}
+dd{padding: 4px;font-size:90%;}
+
+/*form.side label, form.side input, form.side select {margin-bottom:10px;display: block;}*/
+form.side label {margin-bottom: 1px;}
+form.side input.submit{margin-bottom:4px;}
+
+ul#sidenav {padding: 4px;margin-bottom: 10px;background-color: #e1e6fa;}
+ul#sidenav li {margin-bottom: 3px;}
+ul#sidenav a {font-size: 120%;display: block;padding: 2px; color: #183152;}
+ul#sidenav a:hover, ul#sidenav a#selected {background-color: #ABC8E2;text-decoration: none;font-weight: bold;}
+
+/*Edit Form */
+form.edit {background-color: #FFFFFF;}
+form.edit fieldset {border: #CFD2C5 1px solid;border-bottom-width: 4px;padding: 2px 8px 8px 8px;}
+form.edit fieldset.top {border-top: #AEB39E 2px solid;}
+form.edit h3{margin: 0; font-size: 100%;padding: 2px 4px;}	
+form.edit label {display: block;margin: 10px 0 2px 0;font-weight:bold;font-size:11px;}			
+form.edit span {color: #FFFFFF; font-size: 80%;padding-left: 6px;}	
+form.edit input.title {width: 668px;padding: 2px;font-size: 180%;}
+form.edit input.uploadtitle {}	 
+form.edit fieldset.undo {padding-left:3px;}
+form.edit input.cluster{}
+form.edit span.cluster {float:left;display:block;width:300px;margin:0 20px 10px 0;color:#000; font-size:11px;}
+form.edit .selectCluster{margin-bottom: 5px;}
+/*Add content */
+#addcontent {margin:10px 10px 10px 0px;}
+#addcontent input.add {font-size: 150%; margin-left:10px;}
+#addcontent input.title{width: 550px;padding: 2px;font-size: 180%;}
+
+/*tags and tag cloud */
+table.tag {width:700px;}
+table.tag th {display: none;}
+table.tag td + td {display: none;}
+
+#taggit {border:1px solid #FFFFFF;clear:both;}
+#taggit ul li {display:block;float:left;margin-right:4px;margin-left:4px;}
+#taglist li { float:left; margin-right:1em;}
+#selected-tags-container {border:1px solid #FFFFFF;padding-top:8px;}
+#selected-tags-container ul li {background-color:#e5e5e5;margin:2px 2px 2px 2px;padding:3px 6px 3px 6px; display:block;float:left;}
+#selected-tags-container ul li a { padding-left:1em;color:red;}
+
+table.tag tr {display: inline;}
+table.tag td {display: inline; margin: 2px;} /* For Opera and for Multi-word Items */
+
+.sig1 {font-size: 0.8em;}
+.sig2 {font-size: 0.9em}
+.sig3 {font-size: 1em;}
+.sig4 {font-size: 1.1em;}
+.sig5 {font-size: 1.2em;}
+.sig7 {font-size: 1.4em;}
+.sig9 {font-size: 1.6em;}
+.sig11 {font-size: 1.8em;}
+.sig12 {font-size: 1.9em;}
+
+/* Footer */
+.footer{float:left;margin: 20px 20px;background-color: #fff;}
+.right{width: 298px;border:1px solid #375D81;}
+#foot table {background-color:#fff;margin:0;width:600px;}
+#foot h3 {margin: 0;}
+#foot hr {height: 1px; border: none;background-color:#ABC8E2; margin:0px 5px 0px 5px;}
+#foot p{margin:10px;color:#333;}
+#foot p img{margin:0;}
+#foot ul li{font-size: 80%;margin-left: 10px;}
+#foot ul li.last{margin-top: 10px;}
+#foot h4{margin: 10px;font-size: 120%;}
+.blend_powered img {padding-left:10px;}
+
+/*error class */
+.error {color: red; font-weight: bold;}
+
+/*Person Photo Style*/
+.personphoto {margin:10px 0px 0px 0px;}
+.personphoto img {border: 1px solid #666; padding: 5px;}
+.linkarticle {margin:10px 0px 0px 0px;}
+.linkobject {width:200px;border: 1px solid #666;background-color:#ABC8E2; display:block; padding:2px 5px 2px 5px;margin-top:7px;font-size:12px;}
+.linkobject a:hover { text-decoration:underline;}
+.linkarticle .digidoc {font-size: 12px;display:block;padding:5px; color:#000;}
+
+/*promo positions div*/
+#positions {height:350px;overflow:auto;}
+
+/*Blend Home User Content*/
+#mycontent {border:1px solid red;padding:5px;border: #375D81 1px solid;border-bottom-width: 4px;}
+

@@ -1,0 +1,101 @@
+<dtml-call "REQUEST.set('globaltags',[])">
+<dtml-let a="_.string.strip(siteTags)">
+<dtml-let b="_.string.upper(a)">
+  <dtml-let c="_.string.replace(b,'\n','')">
+	  <dtml-let d="_.string.split(c,'\r')">
+			<dtml-call "globaltags.extend(d)">
+	  </dtml-let>
+	</dtml-let>
+</dtml-let>
+</dtml-let>
+<dtml-var cms_edit_header>
+<script type="text/javascript" charset="utf-8">
+/*<![CDATA[*/
+display_error = function (elid, name) {
+	$(elid).className = name;
+}
+validate_form = function () {
+	var no_errors = true;
+
+	if (!isNotEmpty($F('title'))) {
+		no_errors = false;
+		display_error('error_title', 'error');
+	} else {
+		display_error('error_title', '');
+	}
+	if (!no_errors) alert('Please correct the indicated items before continuing.');
+
+	return no_errors;
+}
+/*]]>*/
+</script>
+
+
+<dtml-call "REQUEST.set('fileid', REQUEST.id)">
+
+<dtml-in expr="website.files.objectValues(['ExtFile'])">
+  <dtml-if expr="fileid == id">
+    
+    
+    <p><a href="images/<dtml-var id>"><img style="float:right;" src="/misc_/Blend/bigview" height="32" width="32" border="0" alt="View" title="View in Context"></a></p>
+    <h2>Image ID: <dtml-var id> <span>edited: </span></h2>
+    
+    <form name="form" class="edit" action="editFile" method="post" onsubmit="return validate_form();">
+    <input type="hidden" id="hidden-taglist" name="descr" value="<dtml-var descr>" />
+      
+    <p><input type="submit" value="&nbsp;&nbsp;Save&nbsp;&nbsp;">&nbsp;&nbsp;<a href="../../../files_html?size=50" style="color:red; font-size:11px;text-decoration:underline;">Cancel</a></p>
+
+
+    <fieldset class="top">
+    <label id="error_title" for="title">File Title</label>
+    <input type="text" id="title" class="title" name="title:string" size="30" value="<dtml-with aq_explicit><dtml-var title></dtml-with>">
+    </fieldset>
+
+    <h3 onClick="expandcontent(this,'sc1')"><span class="showstate"></span>Tags</h3>
+    <fieldset>
+      <div id="sc1" class="switchcontent">
+        <div id="taggit">
+        <ul id="taglist">
+        <dtml-in globaltags prefix="loop" sort=desc>
+          <li><a href="#"><dtml-var loop_item></a><dtml-unless sequence-end>, </dtml-unless></li>
+        </dtml-in>
+        </ul>
+        </div>
+      	  <div id="selected-tags-container" style="clear:both;"></div>
+      </div>
+    </fieldset>
+    
+    <p><input type="submit" value="&nbsp;&nbsp;Save&nbsp;&nbsp;">&nbsp;&nbsp;<a href="../../../files_html?size=50" style="color:red; font-size:11px;text-decoration:underline;">Cancel</a></p>
+
+    </form>
+    <dtml-call "REQUEST.set('freshtags',[])">
+    <dtml-let a="_.string.strip(descr)">
+    <dtml-let b="_.string.upper(a)">
+      <dtml-let c="_.string.replace(b,'\n','')">
+    	  <dtml-let d="_.string.split(c,'\r')">
+    			<dtml-call "freshtags.extend(d)">
+    	  </dtml-let>
+    	</dtml-let>
+    </dtml-let>
+    </dtml-let>
+    <script>
+    	//function pageLoaded( event ) {
+    		var options = { 				
+    			field:'hidden-taglist',
+    			selectable_tag_list:'taglist',
+    			selected_tags_container:'selected-tags-container',
+    			remove_text:'X',
+    			initial_tags:[<dtml-in freshtags prefix=loop>'<dtml-var loop_item>'<dtml-unless sequence-end>,</dtml-unless></dtml-in>]
+
+    		}
+    		var list = new SelectableTagList( options );
+    	//}
+
+    	//Event.observe( window , 'load' , pageLoaded );
+    </script>
+    
+  </dtml-if>
+</dtml-in>
+
+
+<dtml-var cms_footer>

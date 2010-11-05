@@ -1,0 +1,110 @@
+<html>
+	<head>
+		<title>Add Blend Site</title>
+	</head>
+	    <body>
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html;charset=iso-8859-1">
+<title></title>
+<link rel="stylesheet" type="text/css" href="/manage_page_style.css">
+</head>
+<body bgcolor="#ffffff" link="#000099" alink="#000099" vlink="#000099">
+<table width="100%" cellpadding="2" cellspacing="0" border="0">
+<tr class="location-bar">
+  <td align="left" valign="top">
+  <div class="form-title">
+  Add Blend Website
+  </div>
+  </td>
+  <td align="right" valign="top"></td>
+</tr>
+</table>
+<p class="form-help">
+A Blend Site contains other content types such as Sections, Pages, Images and Files that are published throughout the Blend Administrative Interface.</p>	    
+<form name="form" action="manage_addSiteAction" method="post">
+<table cellspacing="0" cellpadding="2" border="0">
+<tr>
+  <td align="left" valign="top"><div class="form-label">Id</div></td>
+  <td align="left" valign="top"><input type="text" name="id" value="blend" readonly=1 size="40" /></td>
+</tr>
+<tr>
+  <td align="left" valign="top"><div class="form-label">Title</div></td>
+  <td align="left" valign="top"><input type="text" name="title" value="Blend CPS" readonly=1 size="40" value="My Company"/></td>
+</tr> 
+<tr>
+  <td align="left" valign="top"><div class="form-label">Client Address</div></td>
+  <td align="left" valign="top"><input type="text" name="clientaddress" size="40" value="My Address"/></td>
+</tr>
+<tr>
+  <td align="left" valign="top"><div class="form-label">Client City</div></td>
+  <td align="left" valign="top"><input type="text" name="clientcity" size="40" value="My City"/></td>
+</tr>
+<tr>
+  <td align="left" valign="top"><div class="form-label">Client State</div></td>
+  <td align="left" valign="top"><input type="text" name="clientstate" size="40" value="My State"/></td>
+</tr>  
+<tr>
+  <td align="left" valign="top"><div class="form-label">Client Zip</div></td>
+  <td align="left" valign="top"><input type="text" name="clientzip" size="40" value="My Zip"/></td>
+</tr>
+<tr>
+  <td align="left" valign="top"><div class="form-label">Client Phone 1</div></td>
+  <td align="left" valign="top"><input type="text" name="clientphone1" size="40" value="505-555-5555"/></td>
+</tr>
+<tr>
+  <td align="left" valign="top"><div class="form-label">Client Phone 2</div></td>
+  <td align="left" valign="top"><input type="text" name="clientphone2" size="40" value="555-555-5555"/></td>
+</tr>
+<tr>
+  <td align="left" valign="top"><div class="form-label">Client Email</div></td>
+  <td align="left" valign="top"><input type="text" name="clientemail" size="40" value="info@example.com"/></td>
+</tr>
+<tr>
+  <td align="left" valign="top"><div class="form-label">Event Types</div></td>
+  <td align="left" valign="top"><textarea name="eventTypes" cols="80" rows="5"></textarea></td>
+</tr>
+<tr>
+  <td align="left" valign="top"><div class="form-label">News Types</div></td>
+  <td align="left" valign="top"><textarea name="newsTypes" cols="80" rows="5"></textarea></td>
+</tr>
+<tr>
+  <td align="left" valign="top"><div class="form-label">Cluster Types</div></td>
+  <td align="left" valign="top"><textarea name="clusterTypes" cols="80" rows="5"></textarea></td>
+</tr>
+<tr>
+  <td align="left" valign="top"><div class="form-label">Person Prefix</div></td>
+  <td align="left" valign="top"><textarea name="prefix" cols="80" rows="5"></textarea></td>
+</tr>
+<tr>
+  <td align="left" valign="top"><div class="form-label">Person Suffix</div></td>
+  <td align="left" valign="top"><textarea name="suffix" cols="80" rows="5"></textarea></td>
+</tr>
+<tr>
+  <td align="left" valign="top"><div class="form-label">Work Groups</div></td>
+  <td align="left" valign="top"><textarea name="workgroup" cols="80" rows="5"></textarea></td>
+</tr>
+<tr>
+  <td align="left" valign="top"><div class="form-label">Global Tags</div></td>
+  <td align="left" valign="top"><textarea name="siteTags" cols="80" rows="15"></textarea></td>
+</tr>
+<tr>
+  <td align="left" valign="top"><div class="form-label">Meta Keywords</div></td>
+  <td align="left" valign="top"><input type="text" name="metakeywords" size="40" value="Default Global Meta Keywords" /></td>
+</tr>
+  <td align="left" valign="top"><div class="form-label">Meta Description</div></td>
+  <td align="left" valign="top"><textarea name="metadescription:text" cols="40" rows="4" wrap="virtual">Default Global Meta Description</textarea></td>
+</tr>
+<tr>
+  <td align="left" valign="top"><div class="form-label">Timezone</div></td>
+  <td align="left" valign="top"><input type="text" name="timezone" size="40" value="US/Mountain"/></td>
+</tr>
+<tr>
+  <td align="left" valign="top">&nbsp;</td>
+  <td align="left" valign="top"><div class="form-element"><input class="form-element" type="submit" name="submit" value=" Add Blend Site " /></div></td>
+</tr>
+</table>		    
+</form>
+</body>
+</html>

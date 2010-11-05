@@ -1,0 +1,77 @@
+<dtml-call "REQUEST.set('base_path','../blend')">
+<dtml-if "AUTHENTICATED_USER.getUserName() == 'Anonymous User'">
+<dtml-call "RESPONSE.redirect('login')">
+</dtml-if>
+<dtml-if BASE5>
+  <dtml-let n="_.string.split(BASE5,'/')">
+  <dtml-call "REQUEST.set('library',n[-1])">
+  </dtml-let>
+<dtml-elif BASE4>
+  <dtml-let n="_.string.split(BASE4,'/')">
+  <dtml-call "REQUEST.set('home',n[-1])">
+  </dtml-let>
+</dtml-if>
+<dtml-if library>
+<dtml-call "REQUEST.set('resources',['homepage_html','ipage_html','page_html','clusters_html','people_html','articles_html','images_html','files_html','events_html','news_html','promos_html','adminNews_html'])">
+<dtml-if expr="library in resources">
+  <dtml-call "REQUEST.set('on_resource','yes')">
+</dtml-if>
+</dtml-if>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+ "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+<head>
+<title>Blend CPS</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="Pragma" content="no-cache" />
+<meta http-equiv="Cache-Control" content="no-cache" />
+<link rel="stylesheet" type="text/css" href="/misc_/Blend/cms_styles.css" />
+<script src="/misc_/Blend/scripts.js" type="text/javascript"></script>
+<script src="/misc_/Blend/switch.js" type="text/javascript"></script>
+<script type="text/javascript" src="/misc_/Blend/calendar.js"></script>
+<script type="text/javascript" src="/misc_/Blend/calendar-en.js"></script>
+<script type="text/javascript" src="/misc_/Blend/calendar-setup.js"></script>
+<script type="text/javascript" src="/misc_/Blend/prototype.js"></script>
+<script type="text/javascript" src="/misc_/Blend/validation.js"></script>
+<script type="text/javascript" src="/misc_/Blend/json_request.js"></script>
+<script type="text/javascript" src="/misc_/Blend/json_status_messages.js"></script>
+<script type="text/javascript" src="/misc_/Blend/table_sorter.js"></script>
+
+<script type="text/javascript" src="/misc_/Blend/scriptaculous.js?load=effects"></script>
+<script type="text/javascript" src="/misc_/Blend/lightbox.js"></script>
+<link rel="stylesheet" href="/misc_/Blend/lightbox.css" type="text/css" media="screen" />
+
+<link rel="stylesheet" type="text/css" media="all" href="/misc_/Blend/calendar-win2k-cold-1.css" title="win2k-cold-1" />
+<dtml-comment><dtml-var tinymce.conf></dtml-comment>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="Pragma" content="no-cache" />
+<meta http-equiv="Cache-Control" content="no-cache" />
+</head>
+<body>
+	<div id="head">
+		<h1><a href="<dtml-var base_path>/"><dtml-var title_or_id></a></h1>
+		<dtml-if "AUTHENTICATED_USER.has_role(['Manager'])">
+		<ul id="utilnav">
+			<li><a href="login/logged_out">Logout</a></li>
+			<li><a href="setup_html">Metadata</a></li>	
+			<li class="noborder"><a href="siteEdit">Admin</a></li>	
+		</ul>
+		<dtml-elif "AUTHENTICATED_USER.has_role(['Editor'])">
+		<ul id="utilnav">
+			<li style="border-right:0px;"><a href="login/logged_out">Logout</a></li>
+		</ul>
+		</dtml-if>
+	</div>
+	<div id="wrap">
+	<div id="navcontainer">
+	<ul id="navlist">
+		<li><a href="<dtml-var base_path>/"<dtml-if home><dtml-if expr="home=='blend'">id="current"</dtml-if><dtml-elif on_resource>id="current"</dtml-if>>Content</a></li>
+		<li><a href="<dtml-var base_path>/mydocs_html"<dtml-if library><dtml-if expr="library=='mydocs_html'">id="current"</dtml-if></dtml-if>>Tags</a></li>
+		<dtml-if "AUTHENTICATED_USER.has_role(['Manager'])"><li><a href="<dtml-var base_path>/users_html"<dtml-if library><dtml-if expr="library=='users_html'">id="current"</dtml-if></dtml-if>>Users</a></li></dtml-if>
+		<li><a href="<dtml-var base_path>/help_html"<dtml-if library><dtml-if expr="library=='help_html'">id="current"</dtml-if></dtml-if>>Help</a></li>
+	</ul>
+	</div>
+
+		<div id="content">
+
+			<div id="leftcol">

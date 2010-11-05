@@ -1,0 +1,34 @@
+<dtml-var cms_error_header>
+
+<dtml-if error_message>
+ <dtml-var error_message>
+<dtml-else>
+
+  <h3 style="margin-bottom: 15px;">An error was encountered while publishing this resource.</h3>
+  
+  <p>
+      <strong>Error Type: &dtml-error_type;</strong><br/>
+      <strong>Error Value: &dtml-error_value;</strong><br/> 
+  </p>
+ 
+  <hr noshade="noshade" />
+ 
+  <ul style="margin-left:5px;">
+      <dtml-if "error_type in ('KeyError','NameError')">
+      <li>This resource may be trying to reference a nonexistent object or variable <strong>&dtml-error_value;</strong>.</li></dtml-if>
+      <li>The URL may be incorrect.</li>
+      <li>The parameters passed to this resource may be incorrect.</li>
+      <li>A resource that this resource relies on may be encountering an error.</li>
+  </ul>
+
+  <p style="margin-top:15px;"><strong>This error has been recorded to the error log.</strong></p>
+
+
+  <dtml-comment>
+   Here, events like logging and other actions may also be performed, such as
+   sending mail automatically to the administrator.
+  </dtml-comment>
+
+</dtml-if>
+
+<dtml-var cms_footer>

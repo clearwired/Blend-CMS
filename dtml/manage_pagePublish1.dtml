@@ -1,0 +1,35 @@
+<dtml-let x="_.string.replace(URL1,'/',' ')">
+				<dtml-let z="_.string.split(x,' ')">
+					<dtml-let pubobj="z[-1]">
+						<dtml-call "REQUEST.set ('theobj', pubobj)">
+					</dtml-let>
+				</dtml-let>
+</dtml-let>
+<dtml-var publish_header>
+<h2>Publish Page: <dtml-var theobj></h2>
+<p>Check the Sections into which you would like to publish this page. You can modify the order of the pages in the next step. You can place a page into multiple Sections by selecting more than one section below.</p>
+<form name="publish1" action="doPublish1" method="post">
+<input type="hidden" name="pageobj" value="<dtml-var theobj>">
+<div id="publish_container">
+<table class="lib" cellpadding="0" cellspacing="0" border="0">
+<tr>
+    <th style="width:90%">Section Name</th>
+    <th>Publish?</th>
+</tr>
+<dtml-in expr="website.objectValues(['Blend iPage'])" sort=created reverse>
+	<dtml-if sequence-even>
+	<tr>
+	<dtml-else>
+	<tr class="even">
+	</dtml-if>
+	<td><a href="<dtml-var absolute_url>"><dtml-var title_or_id></a></td>
+	<td style="vertical-align:top;"><input type="checkbox" name="pubbed:list" value="<dtml-var id>"></td>
+	</tr>
+</dtml-in>
+</table>
+<p style="text-align:right;margin-top:10px;">
+<input type="submit" name="publish" value=" Next ->">
+</p>
+</form>
+</div>
+<dtml-var cms_footer>

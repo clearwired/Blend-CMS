@@ -1,0 +1,31 @@
+<dtml-var cms_header>
+<h2>Blend Users</h2>
+
+<p style="text-align:right;text-decoration:underline;"><a href="<dtml-var base_path>/addUser_html">Add User &raquo;</a></p>
+<table id="lib" class="data sortable" cellpadding="0" cellspacing="0" border="0">
+		<tr>
+      <th>Name</th>
+      <th>Email</th>
+      <th>Phone</th>    
+      <th>Role</th>
+      <th class="controls">View</th>
+      <th class="controls">Edit</th>    
+      <th class="controls"><dtml-if "AUTHENTICATED_USER.has_role(['Manager'])">Delete</dtml-if></th>
+		</tr>
+    <dtml-in sqSelectAccounts>
+    	<dtml-if sequence-even>
+    		<tr class="even">
+    	<dtml-else>
+    		<tr class="odd">
+    	</dtml-if>
+        <td><dtml-var account_lname>, <dtml-var account_fname></td>
+        <td><a href="mailto:<dtml-var account_email>"><dtml-var account_email></a></td>
+        <td><dtml-var account_phone></td>
+        <td><dtml-if expr="account_account_type == 3">Manager<dtml-elif expr="account_account_type == 1">Editor</dtml-if></td>
+        <td class="button"><a href="viewUser_html?account_id=<dtml-var account_id>"><img src="/misc_/Blend/delete" height="16" width="16" border="0" alt="View User"></a></td>
+        <td class="button"><a href="editUser_html?account_id=<dtml-var account_id>"><img src="/misc_/Blend/edit" height="16" width="16" border="0" alt="Edit User"></a></td>
+        <td class="button"><a href="deleteUser_html?account_id=<dtml-var account_id>" onClick="return confirmSubmit()"><img src="/misc_/Blend/delete" height="16" width="16" border="0" alt="Delete User"></a></td>
+      </tr>
+    </dtml-in>
+</table>
+<dtml-var cms_footer>

@@ -1,0 +1,21 @@
+<dtml-with aq_parent>
+  <dtml-call "manage_addFolder('website')">
+  <dtml-call "manage_addDTMLMethod('home_html_header', '', 'header')">
+  <dtml-call "manage_addDTMLMethod('home_html_footer', '', 'footer')">
+</dtml-with>
+<dtml-with website>
+  <dtml-call "manage_addFolder('images')">
+  <dtml-call "manage_addFolder('css')">
+  <dtml-call "manage_addFolder('files')">
+  <dtml-call "manage_addFolder('js')">
+  <dtml-call "manage_addFolder('scripts')">
+  <dtml-call "manage_addFolder('templates')">
+  <dtml-with images>
+      <dtml-call "manage_addFolder('design')">
+  </dtml-with>
+  <dtml-with templates>
+      <dtml-call "manage_addDTMLMethod('header_default', 'Default Template', 'header')">
+      <dtml-call "manage_addDTMLMethod('footer_default', 'Default Template', 'footer')">
+  </dtml-with>
+</dtml-with>
+<dtml-call "RESPONSE.redirect('../site/blend')">

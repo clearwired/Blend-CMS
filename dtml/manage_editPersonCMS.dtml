@@ -1,0 +1,296 @@
+<dtml-call "REQUEST.set('globaltags',[])">
+<dtml-let a="_.string.strip(siteTags)">
+<dtml-let b="_.string.upper(a)">
+  <dtml-let c="_.string.replace(b,'\n','')">
+	  <dtml-let d="_.string.split(c,'\r')">
+			<dtml-call "globaltags.extend(d)">
+	  </dtml-let>
+	</dtml-let>
+</dtml-let>
+</dtml-let>
+<dtml-call "REQUEST.set('prefixlist',[])">
+<dtml-let a="_.string.strip(prefix)">
+  <dtml-let b="_.string.replace(a,'\n','')">
+	  <dtml-let c="_.string.split(b,'\r')">
+			<dtml-call "prefixlist.extend(c)">
+	  </dtml-let>
+	</dtml-let>
+</dtml-let>
+<dtml-call "REQUEST.set('suffixlist',[])">
+<dtml-let a="_.string.strip(suffix)">
+  <dtml-let b="_.string.replace(a,'\n','')">
+	  <dtml-let c="_.string.split(b,'\r')">
+			<dtml-call "suffixlist.extend(c)">
+	  </dtml-let>
+	</dtml-let>
+</dtml-let>
+<dtml-call "REQUEST.set('worklist',[])">
+<dtml-let a="_.string.strip(workgroup)">
+  <dtml-let b="_.string.replace(a,'\n','')">
+	  <dtml-let c="_.string.split(b,'\r')">
+			<dtml-call "worklist.extend(c)">
+	  </dtml-let>
+	</dtml-let>
+</dtml-let>
+<dtml-var cms_edit_header>
+<script type="text/javascript" charset="utf-8">
+/*<![CDATA[*/
+display_error = function (elid, name) {
+	$(elid).className = name;
+}
+validate_form = function () {
+	var no_errors = true;
+
+	if (!isNotEmpty($F('title'))) {
+		no_errors = false;
+		display_error('error_title', 'error');
+	} else {
+		display_error('error_title', '');
+	}
+	if (!isNotEmpty($F('fname'))) {
+		no_errors = false;
+		display_error('error_fname', 'error');
+	} else {
+		display_error('error_fname', '');
+	}
+	if (!isNotEmpty($F('lname'))) {
+		no_errors = false;
+		display_error('error_lname', 'error');
+	} else {
+		display_error('error_lname', '');
+	}
+	if (!no_errors) alert('Please correct the indicated items before continuing.');
+
+	return no_errors;
+}
+/*]]>*/
+</script>
+<p><a href=""><img style="float:right;" src="/misc_/Blend/bigview" height="32" width="32" border="0" alt="View" title="View in Context"></a></p>
+<h2>Person ID: <dtml-var id> <span>created: <dtml-var created></span></h2>
+<form name="form" class="edit" action="." method="post" onsubmit="return validate_form();">
+<p><input type="submit" value="&nbsp;&nbsp;Save&nbsp;&nbsp;" name="manage_editSaveAction:method">&nbsp;&nbsp;<a href="../../people_html?size=50" style="color:red; font-size:11px;text-decoration:underline;">Cancel</a></p>
+<input type="hidden" name="created" value="<dtml-var created>">
+<input type="hidden" name="disPos" value="<dtml-var disPos>">
+<input type="hidden" name="cat" value="<dtml-var cat>">
+<input type="hidden" id="hidden-taglist" name="tags" value="<dtml-var tags>" />
+  
+<fieldset class="top">
+	<label id="error_title" for="title">Identifier (First and Last Name)</label>
+	<input class="title" id="title" type="text" name="title:string" size="30" value="<dtml-var title>">
+</fieldset>
+<h3 onClick="expandcontent(this,'sc1')"><span class="showstate"></span>Name, Photo &amp; Summary</h3>
+<fieldset>
+<div id="sc1" class="switchcontent">
+<label id="error_salutation" for="salutation">Salutation</label>
+	<select name="salut" id="salut">
+		<option value="">Please Choose</option>
+		<dtml-in prefixlist prefix="loop">
+		<option value="<dtml-var loop_item>" <dtml-if expr="salut==loop_item">selected</dtml-if>><dtml-var loop_item></option>
+		</dtml-in>
+	</select>
+<label id="error_other_salut" for="other_salut">Salutation (if other)</label>
+<input class="other_salut" id="other_salut" type="text" name="other_salut:string" size="30" value="<dtml-var other_salut>">
+<label id="error_fname" for="fname">First Name</label>
+<input class="fname" id="fname" type="text" name="fname:string" size="30" value="<dtml-var fname>">
+<label id="error_midname" for="midname">Middle Name or Initial</label>
+<input class="midname" id="midname" type="text" name="midname:string" size="20" value="<dtml-var midname>">
+<label id="error_lname" for="lname">Last Name</label>
+<input class="lname" id="lname" type="text" name="lname:string" size="30" value="<dtml-var lname>">
+<label id="error_postitle" for="postitle">Suffix</label>
+<select name="postitle" id="postitle">
+	<option value="">Please Choose</option>
+	<dtml-in suffixlist prefix="loop">
+	<option value="<dtml-var loop_item>" <dtml-if expr="postitle==loop_item">selected</dtml-if>><dtml-var loop_item></option>
+	</dtml-in>
+</select>
+<p class="personphoto">
+<dtml-call "REQUEST.set('prs_id',id)">
+<dtml-in expr="website.images.objectValues(['ExtImage'])">
+	<dtml-if id>
+		<dtml-if expr="prs_id==id">
+				<img src="website/images/<dtml-var prs_id>">
+				<a href="personDeletePhoto?id=<dtml-var id>" class="linkobject">Delete Image</a></p>
+				<dtml-call "REQUEST.set('match',1)">
+		</dtml-if>
+	</dtml-if>
+</dtml-in>
+<dtml-if match>
+<dtml-if expr="match!=1">
+	<a href="javascript:popUp('personAddPhoto?id=<dtml-var prs_id>')" class="linkobject">Upload Image</a>
+</dtml-if>
+<dtml-else>
+		<a href="javascript:popUp('personAddPhoto?id=<dtml-var prs_id>')"class="linkobject">Upload Image</a>
+</dtml-if>
+</p>
+<label for="metadescription">Provide a short summary of this Person:</label>
+<textarea name="shortdesc:text" cols="64" rows="8" wrap="virtual"><dtml-if shortdesc><dtml-var shortdesc></dtml-if></textarea>
+</div>
+</fieldset>
+<h3 onClick="expandcontent(this,'sc2')"><span class="showstate"></span>People Promos</h3>
+<fieldset>
+	<div id="sc2" class="switchcontent">
+<label>Position A:</label><select name="PromoPosA">
+<option value="">--Select Promo--</option>
+<dtml-in expr="website.objectValues(['Blend Promo'])">
+<dtml-if expr="active==1">
+      <option value="<dtml-var id>"<dtml-if expr="PromoPosA == id">selected</dtml-if>><dtml-let promotitle="_['title_or_id'][:20]"><dtml-var promotitle></dtml-let></option>
+</dtml-if>
+</dtml-in>
+</select>
+<label>Position B:</label><select name="PromoPosB">
+<option value="">--Select Promo--</option>
+<dtml-in expr="website.objectValues(['Blend Promo'])">
+<dtml-if expr="active==1">
+      <option value="<dtml-var id>"<dtml-if expr="PromoPosB == id">selected</dtml-if>><dtml-let promotitle="_['title_or_id'][:20]"><dtml-var promotitle></dtml-let></option>
+</dtml-if>
+</dtml-in>
+</select>
+<label>Position C:</label><select name="PromoPosC">
+<option value="">--Select Promo--</option>
+<dtml-in expr="website.objectValues(['Blend Promo'])">
+<dtml-if expr="active==1">
+      <option value="<dtml-var id>"<dtml-if expr="PromoPosC == id">selected</dtml-if>><dtml-let promotitle="_['title_or_id'][:20]"><dtml-var promotitle></dtml-let></option>
+</dtml-if>      
+</dtml-in>
+</select>
+<label>Position D:</label><select name="PromoPosD">
+<option value="">--Select Promo--</option>
+<dtml-in expr="website.objectValues(['Blend Promo'])">
+<dtml-if expr="active==1">
+      <option value="<dtml-var id>"<dtml-if expr="PromoPosD == id">selected</dtml-if>><dtml-let promotitle="_['title_or_id'][:20]"><dtml-var promotitle></dtml-let></option>
+</dtml-if>
+</dtml-in>
+</select>
+<label>Position E:</label><select name="PromoPosE">
+<option value="">--Select Promo--</option>
+<dtml-in expr="website.objectValues(['Blend Promo'])">
+<dtml-if expr="active==1">
+      <option value="<dtml-var id>"<dtml-if expr="PromoPosE == id">selected</dtml-if>><dtml-let promotitle="_['title_or_id'][:20]"><dtml-var promotitle></dtml-let></option>
+</dtml-if>
+</dtml-in>
+</select>
+<label>Position F:</label><select name="PromoPosF">
+<option value="">--Select Promo--</option>
+<dtml-in expr="website.objectValues(['Blend Promo'])">
+<dtml-if expr="active==1">
+      <option value="<dtml-var id>"<dtml-if expr="PromoPosF == id">selected</dtml-if>><dtml-let promotitle="_['title_or_id'][:20]"><dtml-var promotitle></dtml-let></option>
+</dtml-if>      
+</dtml-in>
+</select>
+</div>
+</fieldset>
+
+<h3 onClick="expandcontent(this,'sc3')"><span class="showstate"></span>Clusters</h3>
+<fieldset>
+<div id="sc3" class="switchcontent">
+<label for="Select Clusters" class="selectCluster">Select Clusters</label>
+<dtml-in expr="website.objectValues(['Blend Cluster'])" sort="disPos">
+	<span class="cluster"><input type="checkbox" name="cat" value="<dtml-var id>" <dtml-if expr="id in cat">checked</dtml-if>> <dtml-var title_or_id></span>
+</dtml-in>
+</div>
+</fieldset>
+
+<h3 onClick="expandcontent(this,'sc4')"><span class="showstate"></span>Association</h3>
+<fieldset>
+<div id="sc4" class="switchcontent">
+<label id="error_person_title" for="person_title">Title/Position</label>
+<input class="lname" id="person_title" type="text" name="person_title:string" size="30" value="<dtml-var person_title>">
+	<label id="error_group" for="group">Work Group</label>
+		<select name="group" id="group">
+			<option value="">Please Choose</option>
+			<dtml-in worklist prefix="loop">
+			<option value="<dtml-var loop_item>" <dtml-if expr="group==loop_item">selected</dtml-if>><dtml-var loop_item></option>
+			</dtml-in>
+		</select>
+</div>
+</fieldset>
+<h3 onClick="expandcontent(this,'sc5')"><span class="showstate"></span>Primary Contact</h3>
+<fieldset>
+<div id="sc5" class="switchcontent">
+<label id="error_primary_email" for="primary_email">Primary Email</label>
+<input class="primary_email" id="primary_email" type="text" name="primary_email:string" size="30" value="<dtml-var primary_email>">
+<label id="error_secondary_email" for="secondary_email">Secondary Email</label>
+<input class="secondary_email" id="secondary_email" type="text" name="secondary_email:string" size="30" value="<dtml-var secondary_email>">
+<label id="error_office_phone" for="office_phone">Office Phone</label>
+<input class="office_phone" id="office_phone" type="text" name="office_phone:string" size="30" value="<dtml-var office_phone>">
+<label id="error_office_phone_ext" for="office_phone_ext">Office Phone Extension</label>
+<input class="office_phone_ext" id="office_phone_ext" type="text" name="office_phone_ext:string" size="10" value="<dtml-var office_phone_ext>">
+<label id="error_alternatephone1" for="alternatephone1">Alternate Phone 1</label>
+<input class="alternatephone1" id="alternatephone1" type="text" name="alternatephone1:string" size="30" value="<dtml-var alternatephone1>">
+<label id="error_alternatephone2" for="alternatephone2">Alternate Phone 2</label>
+<input class="alternatephone2" id="alternatephone2" type="text" name="alternatephone2:string" size="30" value="<dtml-var alternatephone2>">
+</div>
+</fieldset>
+<h3 onClick="expandcontent(this,'sc6')"><span class="showstate"></span>Additional Contact</h3>
+<fieldset>
+<div id="sc6" class="switchcontent">
+<label id="error_assistant_name" for="assistant_name">Assistant Name</label>
+<input class="assistant_name" id="assistant_name" type="text" name="assistant_name:string" size="30" value="<dtml-var assistant_name>">
+<label id="error_assistant_phone" for="assistant_phone">Assistant Phone</label>
+<input class="assistant_phone" id="assistant_phone" type="text" name="assistant_phone:string" size="30" value="<dtml-var assistant_phone>">
+	<label id="error_assistant_phone_ext" for="assistant_phone_ext">Assistant Phone Extension</label>
+	<input class="assistant_phone_ext" id="assistant_phone_ext" type="text" name="assistant_phone_ext:string" size="10" value="<dtml-var assistant_phone_ext>">
+<label id="error_assistant_email" for="assistant_email">Assistant Email</label>
+<input class="assistant_email" id="assistant_email" type="text" name="assistant_email:string" size="30" value="<dtml-var assistant_email>">
+</div>
+</fieldset>
+<h3 style="padding-left: 20px;">Biography</h3>
+<fieldset class="undo">
+<textarea name="data" cols="85" rows="15"><dtml-var data></textarea>
+</fieldset>
+
+<h3 onClick="expandcontent(this,'sc7')"><span class="showstate"></span>Tags</h3>
+<fieldset>
+  <div id="sc7" class="switchcontent">
+    <div id="taggit">
+    <ul id="taglist">
+    <dtml-in globaltags prefix="loop" sort=desc>
+      <li><a href="#"><dtml-var loop_item></a><dtml-unless sequence-end>, </dtml-unless></li>
+    </dtml-in>
+    </ul>
+    </div>
+  	  <div id="selected-tags-container" style="clear:both;"></div>
+  </div>
+</fieldset>
+
+<h3 onClick="expandcontent(this,'sc8')"><span class="showstate"></span> Manage Keywords &amp; Description</h3>
+<fieldset>
+<div id="sc8" class="switchcontent">
+<label for="seotitle">SEO Title:</label>
+<input type="text" name="seotitle:string" size="85" value="<dtml-if seotitle><dtml-var seotitle></dtml-if>">
+<label for="title">Keywords:</label> <span class="note">To add custom meta data, overwrite global meta data. See Help &amp; Training for additional information.</span>
+<input type="text" name="metakeywords:string" size="85" id="metakeywords" value="<dtml-if metakeywords><dtml-var metakeywords><dtml-else><dtml-in "PARENTS[2:-2]" reverse><dtml-in expr="objectValues(['Blend Site'])"><dtml-var metakeywords></dtml-in></dtml-in></dtml-if>">
+<label for="metadescription">Description:</label><br />
+<textarea name="metadescription:text" cols="64" rows="8" wrap="virtual"><dtml-if metadescription><dtml-var metadescription><dtml-else><dtml-in "PARENTS[2:-2]" reverse><dtml-in expr="objectValues(['Blend Site'])"><dtml-var metadescription></dtml-in></dtml-in></dtml-if></textarea>
+</div>
+</fieldset>
+
+<p><input type="submit" value="&nbsp;&nbsp;Save&nbsp;&nbsp;" name="manage_editSaveAction:method">&nbsp;&nbsp;<a href="../../people_html?size=50" style="color:red; font-size:11px;text-decoration:underline;">Cancel</a></p>
+</form>
+<dtml-call "REQUEST.set('freshtags',[])">
+<dtml-let a="_.string.strip(tags)">
+<dtml-let b="_.string.upper(a)">
+  <dtml-let c="_.string.replace(b,'\n','')">
+	  <dtml-let d="_.string.split(c,'\r')">
+			<dtml-call "freshtags.extend(d)">
+	  </dtml-let>
+	</dtml-let>
+</dtml-let>
+</dtml-let>
+<script>
+	//function pageLoaded( event ) {
+		var options = { 				
+			field:'hidden-taglist',
+			selectable_tag_list:'taglist',
+			selected_tags_container:'selected-tags-container',
+			remove_text:'X',
+			initial_tags:[<dtml-in freshtags prefix=loop>'<dtml-var loop_item>'<dtml-unless sequence-end>,</dtml-unless></dtml-in>]
+			
+		}
+		var list = new SelectableTagList( options );
+	//}
+	
+	//Event.observe( window , 'load' , pageLoaded );
+</script>
+<dtml-var cms_footer>
+

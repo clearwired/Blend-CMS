@@ -1,0 +1,254 @@
+<dtml-if "AUTHENTICATED_USER.has_role(['Manager','Editor'])">
+<dtml-var cms_header>
+  <dtml-call "REQUEST.set('ownedobjs',[])">
+      <dtml-with owner_info mapping>
+        <dtml-call "REQUEST.set('objowner',id)">
+      </dtml-with> 
+      <dtml-in expr="website.objectValues(['Blend Page'])" sort=bobobase_modification_time reverse>
+        <dtml-with owner_info mapping>
+            <dtml-if expr="objowner == id">
+              <dtml-call "REQUEST.set('pwnd','yesir')">
+            </dtml-if>
+        </dtml-with>
+          <dtml-if pwnd>
+             <dtml-call "ownedobjs.append(id)">
+          </dtml-if>
+      </dtml-in>
+
+      <div id="mycontent">
+        <h2>My Content (<dtml-var "ZopeTime(). toZone(timezone)" fmt=fCommon>)</h2>
+        <ul style="padding:5px;">
+      <dtml-in ownedobjs prefix="loop" size="16">
+        <li style="width:320px; float:left;"><a href="website/<dtml-var loop_item>/pageEditCMS">&raquo; <dtml-var loop_item></a></li>
+      </dtml-in>
+    </ul>
+      <div style="clear:both;"></div>
+  </div>
+  <h2>Latest Updates Sitewide</h2>
+<table id="lib" class="data sortable" cellpadding="0" cellspacing="0" border="0">
+	<dtml-in expr="website.objectValues(['Blend iPage'])" sort=bobobase_modification_time reverse size=5 start=start>
+	<dtml-if sequence-start>
+	<h3>Sections (<dtml-let counter="_.len(website.objectValues(['Blend iPage']))"><dtml-var counter></dtml-let>) <span><a href="ipage_html?size=50" class="view">View All</a></span></h3>
+		<tr>
+			<th style="text-align:left;" width="250px;">Title</th>
+			<th style="text-align:left;">Last Modified</th>   
+			<th class="controls">Edit</th>   
+		</tr>
+	</dtml-if>
+	<dtml-if sequence-even>
+		<tr class="even">
+	<dtml-else>
+		<tr class="odd">
+	</dtml-if>
+			<td><a href="website/<dtml-var id>" title="<dtml-var title_or_id>"><dtml-let pagetitle="_['title_or_id'][:30]"><dtml-var pagetitle></dtml-let></a></td>
+			<td><dtml-var "bobobase_modification_time(). toZone(timezone)" fmt=fCommon></td>
+			<td class="button"><a href="website/<dtml-var id>/ipageEditCMS"><img src="/misc_/Blend/edit" height="16" width="16" border="0" alt="Edit Document"></a></td>
+		</tr>
+	</dtml-in>
+</table>
+
+		
+<table id="lib" class="data sortable" cellpadding="0" cellspacing="0" border="0">
+	<dtml-in expr="website.objectValues(['Blend Page'])" sort=bobobase_modification_time reverse size=5 start=start>
+	<dtml-if sequence-start>
+	<h3>Pages (<dtml-let counter="_.len(website.objectValues(['Blend Page']))"><dtml-var counter></dtml-let>) <span><a href="page_html?size=50" class="view">View All</a></span></h3>
+		<tr>
+			<th style="text-align:left;" width="250px;">Title</th>
+			<th style="text-align:left;">Last Modified</th>   
+			<th class="controls">Edit</th>   
+		</tr>
+	</dtml-if>
+		<dtml-if sequence-even>
+		<tr class="even">
+	<dtml-else>
+		<tr class="odd">
+	</dtml-if>
+			<td><a href="website/<dtml-var id>" title="<dtml-var title_or_id>"><dtml-let pagetitle="_['title_or_id'][:30]"><dtml-var pagetitle></dtml-let></a></td>
+			<td><dtml-var "bobobase_modification_time(). toZone(timezone)" fmt=fCommon></td>
+			<td class="button"><a href="website/<dtml-var id>/pageEditCMS"><img src="/misc_/Blend/edit" height="16" width="16" border="0" alt="Edit Document"></a></td>
+		</tr>
+	</dtml-in>
+</table>
+
+<table id="lib" class="data sortable" cellpadding="0" cellspacing="0" border="0">
+	<dtml-in expr="website.objectValues(['Blend Cluster'])" sort=bobobase_modification_time reverse size=5 start=start>
+	<dtml-if sequence-start>
+	<h3>Clusters (<dtml-let counter="_.len(website.objectValues(['Blend Cluster']))"><dtml-var counter></dtml-let>) <span><a href="clusters_html?size=50" class="view">View All</a></span></h3>
+		<tr>
+			<th style="text-align:left;" width="250px;">Title</th>
+			<th style="text-align:left;">Last Modified</th>   
+			<th class="controls">Edit</th>   
+		</tr>
+	</dtml-if>
+		<dtml-if sequence-even>
+		<tr class="even">
+	<dtml-else>
+		<tr class="odd">
+	</dtml-if>
+			<td><a href="website/<dtml-var id>" title="<dtml-var title_or_id>"><dtml-let pagetitle="_['title_or_id'][:30]"><dtml-var pagetitle></dtml-let></a></td>
+			<td><dtml-var "bobobase_modification_time(). toZone(timezone)" fmt=fCommon></td>
+			<td class="button"><a href="website/<dtml-var id>/clusterEditCMS"><img src="/misc_/Blend/edit" height="16" width="16" border="0" alt="Edit Document"></a></td>
+		</tr>
+	</dtml-in>
+</table>
+
+<table id="lib" class="data sortable" cellpadding="0" cellspacing="0" border="0">
+	<dtml-in expr="website.objectValues(['Blend Person'])" sort=bobobase_modification_time reverse size=5 start=start>
+	<dtml-if sequence-start>
+	<h3>People (<dtml-let counter="_.len(website.objectValues(['Blend Person']))"><dtml-var counter></dtml-let>) <span><a href="people_html?size=50" class="view">View All</a></span></h3>
+		<tr>
+			<th style="text-align:left;" width="250px;">Title</th>
+			<th style="text-align:left;">Last Modified</th>   
+			<th class="controls">Edit</th>   
+		</tr>
+	</dtml-if>
+		<dtml-if sequence-even>
+		<tr class="even">
+	<dtml-else>
+		<tr class="odd">
+	</dtml-if>
+			<td><a href="website/<dtml-var id>" title="<dtml-var title_or_id>"><dtml-let pagetitle="_['title_or_id'][:30]"><dtml-var pagetitle></dtml-let></a></td>
+			<td><dtml-var "bobobase_modification_time(). toZone(timezone)" fmt=fCommon></td>
+			<td class="button"><a href="website/<dtml-var id>/personEditCMS"><img src="/misc_/Blend/edit" height="16" width="16" border="0" alt="Edit Document"></a></td>
+		</tr>
+	</dtml-in>
+</table>
+
+<table id="lib" class="data sortable" cellpadding="0" cellspacing="0" border="0">
+	<dtml-in expr="website.objectValues(['Blend Article'])" sort=bobobase_modification_time reverse size=5 start=start>
+	<dtml-if sequence-start>
+	<h3>Articles (<dtml-let counter="_.len(website.objectValues(['Blend Article']))"><dtml-var counter></dtml-let>) <span><a href="articles_html?size=50" class="view">View All</a></span></h3>
+		<tr>
+			<th style="text-align:left;" width="250px;">Title</th>
+			<th style="text-align:left;">Last Modified</th>   
+			<th class="controls">Edit</th>   
+		</tr>
+	</dtml-if>
+		<dtml-if sequence-even>
+		<tr class="even">
+	<dtml-else>
+		<tr class="odd">
+	</dtml-if>
+			<td><a href="website/<dtml-var id>" title="<dtml-var title_or_id>"><dtml-let pagetitle="_['title_or_id'][:30]"><dtml-var pagetitle></dtml-let></a></td>
+			<td><dtml-var "bobobase_modification_time(). toZone(timezone)" fmt=fCommon></td>
+			<td class="button"><a href="website/<dtml-var id>/articleEditCMS"><img src="/misc_/Blend/edit" height="16" width="16" border="0" alt="Edit Document"></a></td>
+		</tr>
+	</dtml-in>
+</table>
+
+
+<table id="lib" class="data sortable" cellpadding="0" cellspacing="0" border="0">	
+	<dtml-in expr="website.images.objectValues(['ExtImage'])" sort=bobobase_modification_time reverse size=5 start=start>
+	<dtml-if sequence-start>
+	<h3>Images (<dtml-let counter="_.len(website.images.objectValues(['ExtImage']))"><dtml-var counter></dtml-let>) <span><a href="images_html?size=50" class="view">View All</a></span></h3>	
+		<tr>
+			<th style="text-align:left;" width="250px;">Title</th>
+			<th style="text-align:left;">Last Modified</th>
+			<th class="controls">View</th>      
+		</tr>
+	</dtml-if>
+		<dtml-if sequence-even>
+		<tr class="even">
+	<dtml-else>
+		<tr class="odd">
+	</dtml-if>
+			<td><a href="website/images/<dtml-var id>" title="<dtml-var title_or_id>" target="_blank"><dtml-let pagetitle="_['title_or_id'][:30]"><dtml-var pagetitle></dtml-let></td> 
+			<td><dtml-var "bobobase_modification_time(). toZone(timezone)" fmt=fCommon></td>
+			<td class="button" id="view"><a href="website/images/<dtml-var id>" rel="lightbox[Gallery]"><img src="/misc_/Blend/viewit" height="16" width="16" border="0" alt="View Image"></a></td>
+		</tr>
+	</dtml-in>
+</table>
+
+	
+<table id="lib" class="data sortable" cellpadding="0" cellspacing="0" border="0">	
+	<dtml-in expr="website.files.objectValues(['ExtFile'])" sort=bobobase_modification_time reverse size=5 start=start>
+	<dtml-if sequence-start>
+	<h3>Documents (<dtml-let counter="_.len(website.files.objectValues(['ExtFile']))"><dtml-var counter></dtml-let>) <span><a href="files_html?size=50" class="view">View All</a></span></h3>
+		<tr>
+			<th style="text-align:left;" width="250px;">Title</th>   
+			<th style="text-align:left;">Last Modified</th>
+			<th class="controls">View</th>      
+		</tr>
+		</dtml-if>
+			<dtml-if sequence-even>
+			<tr class="even">
+		<dtml-else>
+		<tr class="odd">
+		</dtml-if>
+			<td><a href="website/files/<dtml-var id>" title="<dtml-var title_or_id>"><dtml-let pagetitle="_['title_or_id'][:30]"><dtml-var pagetitle></dtml-let></td>       
+			<td><dtml-var "bobobase_modification_time(). toZone(timezone)" fmt=fCommon></td>
+			<td class="button" id="view"><a href="website/files/<dtml-var id>"><img src="/misc_/Blend/viewit" height="16" width="16" border="0" alt="View Document"></a></td>
+		</tr>
+	</dtml-in>
+</table>
+
+<table id="lib" class="data sortable" cellpadding="0" cellspacing="0" border="0">
+	<dtml-in expr="website.objectValues(['Blend Event'])" sort=bobobase_modification_time reverse size=5 start=start>
+	<dtml-if sequence-start>
+	<h3>Events (<dtml-let counter="_.len(website.objectValues(['Blend Event']))"><dtml-var counter></dtml-let>) <span><a href="events_html?size=50" class="view">View All</a></span></h3>
+		<tr>
+			<th style="text-align:left;" width="250px;">Title</th>
+			<th style="text-align:left;">Last Modified</th>
+			<th class="controls">Edit</th>
+		</tr>
+		</dtml-if>
+			<dtml-if sequence-even>
+			<tr class="even">
+		<dtml-else>
+			<tr class="odd">
+		</dtml-if>
+			<td><a href="website/<dtml-var id>"><dtml-let eventtitle="_['title_or_id'][:30]"><dtml-var eventtitle></dtml-let></a></td>
+			<td><dtml-var "bobobase_modification_time(). toZone(timezone)" fmt=fCommon></td>
+			<td class="button" id="edit"><a href="website/<dtml-var id>/eventEditCMS"><img src="/misc_/Blend/edit" alt="Edit Document"></a></td>       
+		</tr>
+	</dtml-in>
+</table>
+
+<table id="lib" class="data sortable" cellpadding="0" cellspacing="0" border="0">
+	<dtml-in expr="website.objectValues(['Blend News'])" sort=title_or_id size=5 start=start>
+	<dtml-if sequence-start>
+	<h3>News (<dtml-let counter="_.len(website.objectValues(['Blend News']))"><dtml-var counter></dtml-let>) <span><a href="news_html?size=50" class="view">View All</a></span></h3>
+		<tr>
+			<th style="text-align:left;" width="250px;">Title</th>
+			<th style="text-align:left;">Last Modified</th>  
+			<th class="controls">Edit</th>
+		</tr>
+		</dtml-if>
+			<dtml-if sequence-even>
+			<tr class="even">
+		<dtml-else>
+			<tr class="odd">
+		</dtml-if>
+			<td><a href="website/<dtml-var id>" title="<dtml-var title_or_id>"><dtml-let pagetitle="_['title_or_id'][:30]"><dtml-var pagetitle></dtml-let></a></td>
+			<td><dtml-var "bobobase_modification_time(). toZone(timezone)" fmt=fCommon></td>
+			<td class="button"><a href="website/<dtml-var id>/newsEditCMS"><img src="/misc_/Blend/edit" height="16" width="16" border="0" alt="Edit Document"></a></td>       
+		</tr>
+	</dtml-in>
+</table>
+
+<table id="lib" class="data sortable" cellpadding="0" cellspacing="0" border="0">
+	<dtml-in expr="website.objectValues(['Blend Promo'])" sort=bobobase_modification_time reverse size=5 start=start>
+	<dtml-if sequence-start>
+	<h3>Promos (<dtml-let counter="_.len(website.objectValues(['Blend Promo']))"><dtml-var counter></dtml-let>) <span><a href="promos_html?size=50" class="view">View All</a></span></h3>
+		<tr>
+			<th style="text-align:left;" width="250px;">Title</th>
+			<th style="text-align:left;">Last Modified</th>   
+			<th class="controls">Edit</th>   
+		</tr>
+	</dtml-if>
+		<dtml-if sequence-even>
+		<tr class="even">
+	<dtml-else>
+		<tr class="odd">
+	</dtml-if>
+			<td><a href="website/<dtml-var id>" title="<dtml-var title_or_id>"><dtml-let pagetitle="_['title_or_id'][:30]"><dtml-var pagetitle></dtml-let></a></td>
+			<td><dtml-var "bobobase_modification_time(). toZone(timezone)" fmt=fCommon></td>
+			<td class="button"><a href="website/<dtml-var id>/promoEditCMS"><img src="/misc_/Blend/edit" height="16" width="16" border="0" alt="Edit Document"></a></td>
+		</tr>
+	</dtml-in>
+</table>
+
+<dtml-var cms_footer>
+<dtml-else>
+<dtml-call "RESPONSE.redirect('blend/login')">
+</dtml-if>

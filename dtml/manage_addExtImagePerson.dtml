@@ -1,0 +1,34 @@
+<dtml-comment>
+<dtml-var "REQUEST.set('file', REQUEST.file)">
+<dtml-var "REQUEST.set('title',REQUEST.title)">
+</dtml-comment>
+<dtml-call "context.manage_addProduct['ExtFile'].manage_addExtImage(id=REQUEST['id'],title=REQUEST['title'],file=file)">
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+	<head>
+	<title>Blend CPS</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta http-equiv="Pragma" content="no-cache" />
+	<meta http-equiv="Cache-Control" content="no-cache" />
+	<link rel="stylesheet" type="text/css" href="/misc_/Blend/cms_styles.css" />
+	<script type="text/javascript" charset="utf-8">
+	<!--
+	function win(){
+	window.opener.location.href="../../../<dtml-var theperson>/personEditCMS";
+	self.close();
+	}
+	-->
+</script>
+</head>
+
+<body>
+	<div style="margin:30px 10px 10px 10px; text-align:center;">
+	<h2>Image Successfully Uploaded!</h2>
+	<p><input type=button onClick="win();" value="&nbsp; Close Window &nbsp;"></p>
+	</div
+</body>
+</html>

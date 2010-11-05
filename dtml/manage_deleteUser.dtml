@@ -1,0 +1,2 @@
+<dtml-call expr="sqDeleteAccount(account_id=account_id)">
+<dtml-call "RESPONSE.redirect('users_html')">

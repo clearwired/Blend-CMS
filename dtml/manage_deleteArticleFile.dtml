@@ -1,0 +1,2 @@
+<dtml-call expr="files.manage_delObjects(REQUEST['id'])">
+<dtml-call expr="RESPONSE.redirect(HTTP_REFERER)">

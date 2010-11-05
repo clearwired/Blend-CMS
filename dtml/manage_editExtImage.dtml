@@ -1,0 +1,2 @@
+<dtml-call "context.manage_editExtFile(title=REQUEST['title'],descr=REQUEST['descr'])">
+<dtml-call "RESPONSE.redirect('../../../images_html?size=50')">

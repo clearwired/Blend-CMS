@@ -1,0 +1,14 @@
+<dtml-if pubbed>
+	<dtml-with REQUEST>
+		<dtml-in pubbed prefix="loop">
+			<dtml-in expr="website.objectValues(['Blend iPage'])">
+			<dtml-if expr="loop_item == id">
+				<dtml-var "manage_publishItems(pageobj)">
+				<dtml-call "RESPONSE.redirect('pagePublish2_html')">
+			</dtml-if>
+			</dtml-in>
+		</dtml-in>
+	</dtml-with>
+<dtml-else>
+<dtml-call "RESPONSE.redirect('pagePublish1_html')">
+</dtml-if>

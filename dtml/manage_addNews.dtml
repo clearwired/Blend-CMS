@@ -1,0 +1,15 @@
+<manage_page_header>
+		    <form name="form" action="manage_addNewsAction" method="post">
+		    <fieldset>
+		    <legend>Add News</legend>
+		    <input type="hidden" name="data" value="">
+		    <p><label for="ID"><strong><span class="required">*</span>ID</strong></label><br />
+		    <input type="text" name="id:string" size="30" maxlength="25" value="Add News ID"></p>
+		    <p><label for="Title"><strong>Title</strong></label><br />
+		    <input type="text" name="title:string" size="30" maxlength="25" value="Add Page Title"></p>
+		    <br />
+		    <input type="submit" value=" Add Blend News " style="margin-left:10px;">
+		    </fieldset>
+		    <br />
+		    </form>
+<manage_page_footer>

@@ -1,0 +1,92 @@
+<dtml-call "REQUEST.set('taglist',[])">
+<dtml-in expr="website.objectValues(['Blend Page','Blend iPage','Blend Event','Blend News','Blend Promo','Blend Admin News','Blend Person','Blend Article','Blend Cluster'])">
+<dtml-if expr="tags != ''">
+	<dtml-let a="_.string.split(tags,'\r')">
+			<dtml-call "taglist.extend(a)">
+	</dtml-let>
+</dtml-if>
+</dtml-in>
+
+<dtml-in expr="website.files.objectValues(['ExtFile'])">
+  <dtml-if expr="descr != ''">
+  	<dtml-let a="_.string.split(descr,'\r')">
+  			<dtml-call "taglist.extend(a)">
+  	</dtml-let>
+  </dtml-if>
+</dtml-in>
+
+<dtml-in expr="website.images.objectValues(['ExtImage'])">
+  <dtml-if expr="descr != ''">
+  	<dtml-let a="_.string.split(descr,'\r')">
+  			<dtml-call "taglist.extend(a)">
+  	</dtml-let>
+  </dtml-if>
+</dtml-in>
+
+<dtml-call "REQUEST.set('tagdict', buildTags(taglist))">
+
+<dtml-var cms_header>
+<dtml-if expr="filter=='y'">
+  
+  
+  
+  
+<h2>Content Tagged "<dtml-var expr="tag.capitalize()">"</h2>
+<table id="lib" class="data" cellpadding="0" cellspacing="0" border="0">
+  <tr>
+		<th style="text-align:left;" width="250px;">Title</th>
+		<th style="text-align:left;">Last Modified</th>
+		<th style="text-align:left;">Type</th>
+		<th>Edit</th>
+	</tr>
+	<tr class="even">
+	<dtml-in expr="website.objectValues(['Blend Page', 'Blend iPage','Blend Event','Blend News','Blend Promo','Blend Admin News','Blend Person','Blend Article','Blend Cluster'])" sort=bobobase_modification_time reverse>
+		<dtml-if expr="tag in tags">
+			<td><a href="website/<dtml-var id>" title="<dtml-var title_or_id>"><dtml-let pagetitle="_['title_or_id'][:30]"><dtml-var pagetitle></dtml-let></a></td>
+			<td><dtml-var "bobobase_modification_time(). toZone(timezone)" fmt=fCommon></td>
+			<td><dtml-var meta_type></td>
+			<dtml-if expr="meta_type=='Blend Page'">
+			<td class="button"><a href="website/<dtml-var id>/pageEditCMS"><img src="/misc_/Blend/edit" height="16" width="16" border="0" alt="Edit Document"></a></td>
+			<dtml-elif expr="meta_type=='Blend iPage'">
+			<td class="button"><a href="website/<dtml-var id>/ipageEditCMS"><img src="/misc_/Blend/edit" height="16" width="16" border="0" alt="Edit Document"></a></td>
+			<dtml-elif expr="meta_type=='Blend Event'">
+			<td class="button"><a href="website/<dtml-var id>/eventEditCMS"><img src="/misc_/Blend/edit" height="16" width="16" border="0" alt="Edit Document"></a></td>
+			<dtml-elif expr="meta_type=='Blend News'">
+			<td class="button"><a href="website/<dtml-var id>/newsEditCMS"><img src="/misc_/Blend/edit" height="16" width="16" border="0" alt="Edit Document"></a></td>
+			<dtml-elif expr="meta_type=='Blend Promo'">
+			<td class="button"><a href="website/<dtml-var id>/promoEditCMS"><img src="/misc_/Blend/edit" height="16" width="16" border="0" alt="Edit Document"></a></td>
+			<dtml-elif expr="meta_type=='Blend Admin News'">
+			<td class="button"><a href="website/<dtml-var id>/adminNewsEditCMS"><img src="/misc_/Blend/edit" height="16" width="16" border="0" alt="Edit Document"></a></td>
+			<dtml-elif expr="meta_type=='Blend Person'">
+			<td class="button"><a href="website/<dtml-var id>/personEditCMS"><img src="/misc_/Blend/edit" height="16" width="16" border="0" alt="Edit Document"></a></td>
+			<dtml-elif expr="meta_type=='Blend Article'">
+			<td class="button"><a href="website/<dtml-var id>/articleEditCMS"><img src="/misc_/Blend/edit" height="16" width="16" border="0" alt="Edit Document"></a></td>
+			<dtml-elif expr="meta_type=='Blend Cluster'">
+			<td class="button"><a href="website/<dtml-var id>/clusterEditCMS"><img src="/misc_/Blend/edit" height="16" width="16" border="0" alt="Edit Document"></a></td>
+			<dtml-elif expr="meta_type=='ExtFile'">
+			<td class="button"><a href="website/files/<dtml-var id>/fileEditCMS?id=<dtml-var id>"><img src="/misc_/Blend/edit" height="16" width="16" border="0" alt="Edit Document"></a></td>
+			<dtml-elif expr="meta_type=='ExtImage'">
+			<td class="button"><a href="website/images/<dtml-var id>/imageEditCMS?id=<dtml-var id>"><img src="/misc_/Blend/edit" height="16" width="16" border="0" alt="Edit Document"></a></td>
+			</dtml-if>
+			</tr>
+	</dtml-if>
+	</dtml-in>
+</table>
+
+<dtml-else>
+<h2>My Tagged Content</h2>
+<table class="tag">
+	<tr>
+		<th>Tag</th>
+		<th>Significance</th>
+	</tr>
+	<dtml-in "tagdict.items()" prefix=loop sort=asc>
+	<tr class="sig<dtml-var loop_item>">
+		<td><a href="mydocs_html?filter=y&tag=<dtml-var expr="loop_key.strip()">" style="font-color: blue;"><dtml-var expr="scrubTags(loop_key)"></a></td>
+		<td><dtml-var loop_item></td>
+	</tr>
+	</dtml-in>
+</table>
+</dtml-if>
+<dtml-var cms_footer>
+	

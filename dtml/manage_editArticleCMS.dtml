@@ -1,0 +1,225 @@
+<dtml-call "REQUEST.set('globaltags',[])">
+<dtml-let a="_.string.strip(siteTags)">
+<dtml-let b="_.string.upper(a)">
+  <dtml-let c="_.string.replace(b,'\n','')">
+	  <dtml-let d="_.string.split(c,'\r')">
+			<dtml-call "globaltags.extend(d)">
+	  </dtml-let>
+	</dtml-let>
+</dtml-let>
+</dtml-let>
+<dtml-var cms_edit_header>
+<script type="text/javascript" charset="utf-8">
+/*<![CDATA[*/
+display_error = function (elid, name) {
+	$(elid).className = name;
+}
+validate_form = function () {
+	var no_errors = true;
+
+	if (!isNotEmpty($F('title'))) {
+		no_errors = false;
+		display_error('error_title', 'error');
+	} else {
+		display_error('error_title', '');
+	}
+	if (!isNotEmpty($F('pubdate'))) {
+		no_errors = false;
+		display_error('error_pubdate', 'error');
+	} else {
+		display_error('error_pubdate', '');
+	}
+	if (!isNotEmpty($F('expiry'))) {
+		no_errors = false;
+		display_error('error_expiry', 'error');
+	} else {
+		display_error('error_expiry', '');
+	}
+	if (!no_errors) alert('Please correct the indicated items before continuing.');
+
+	return no_errors;
+}
+/*]]>*/
+</script>
+<p><a href=""><img style="float:right;" src="/misc_/Blend/bigview" height="32" width="32" border="0" alt="View" title="View in Context"></a></p>
+<h2>Article ID: <dtml-var id> <span>created: <dtml-var created></span></h2>
+<dtml-var container>
+<form name="form" class="edit" action="." method="post" onsubmit="return validate_form();">
+<p><input type="submit" value="&nbsp;&nbsp;Save&nbsp;&nbsp;" name="manage_editSaveAction:method">&nbsp;&nbsp;<a href="../../articles_html?size=50" style="color:red; font-size:11px;text-decoration:underline;">Cancel</a></p>
+<input type="hidden" name="created" value="<dtml-var created>">
+<input type="hidden" name="electronic" value="<dtml-if electronic><dtml-var electronic></dtml-if>">
+<input type="hidden" name="cat" value="<dtml-var "getCatItems()">">
+<input type="hidden" id="hidden-taglist" name="tags" value="<dtml-var tags>" />
+  
+
+<fieldset class="top">
+<label id="error_title" for="title">Article Title</label>
+<input type="text" id="title" class="title" name="title:string" size="30" value="<dtml-var title>">
+</fieldset>
+
+<h3 onClick="expandcontent(this,'sc1')"><span class="showstate"></span>Article Details</h3>
+<fieldset>
+<div id="sc1" class="switchcontent">
+<label  id="error_pubdate" for="pubdate">Article Publication Date</label>
+<input type="text" name="pubdate:date" id="pubdate" size="30" value="<dtml-var pubdate>">
+<img src="/misc_/Blend/calendar" id="triggerstart" style="cursor: pointer;" title="Date selector" />
+<label id="error_expiry" for="expiry">Article Expiration Date</label>
+<input type="text" name="expiry:date" id="expiry" size="30" value="<dtml-var expiry>">
+<img src="/misc_/Blend/calendar" id="triggerend" style="cursor: pointer;" title="Date selector" />
+<label id="error_abstract" for="abstract">Article Abstract</label>
+<textarea name="abstract:string" id="abstract" rows="5" cols="39"/><dtml-var abstract></textarea>
+
+<p class="linkarticle">
+  
+  <dtml-let a="_.string.split(id,'.')">
+  	<dtml-call "REQUEST.set('art_ext', a[0] + '.pdf')">
+  </dtml-let>
+  
+
+<dtml-in expr="website.files.objectValues(['ExtFile'])">
+  
+	<dtml-if id>
+		<dtml-if expr="art_ext==id">
+				<span class="digidoc"><strong>Linked File:</strong> <a href="../../../website/files/<dtml-var art_ext>" style="text-decoration:underline;"><dtml-var title_or_id></a> (<dtml-var content_type>)</span>
+				<a href="articleDeleteFile?id=<dtml-var art_ext>" class="linkobject">&raquo; Unlink Downloadable Version</a></p>
+				<dtml-call "REQUEST.set('match',1)">
+		</dtml-if>
+	</dtml-if>
+	
+</dtml-in>
+<dtml-if match>
+<dtml-if expr="match!=1">
+	<a href="javascript:popUp('articleAddFile?id=<dtml-var art_ext>')" class="linkobject">Link Downloadable .PDF Version</a>
+</dtml-if>
+<dtml-else>
+		<a href="javascript:popUp('articleAddFile?id=<dtml-var art_ext>')" class="linkobject">Link Downloadable .PDF Version</a>
+</dtml-if>
+</p>
+
+</div>
+</fieldset>
+
+<h3 onClick="expandcontent(this,'sc2')"><span class="showstate"></span>Article Author(s)</h3>
+<fieldset>
+<div id="sc2" class="switchcontent">
+<label>Author 1:</label><select name="author1">
+<option value="None">--Select Author--</option>
+<dtml-in expr="website.objectValues(['Blend Person'])">
+      <option value="<dtml-var id>"<dtml-if expr="author1 == id">selected</dtml-if>><dtml-let authorname="_['title_or_id'][:20]"><dtml-var authorname></dtml-let></option>
+</dtml-in>
+</select>
+<label>Author 2:</label><select name="author2">
+<option value="">--Select Author--</option>
+<dtml-in expr="website.objectValues(['Blend Person'])">
+      <option value="<dtml-var id>"<dtml-if expr="author2 == id">selected</dtml-if>><dtml-let authorname="_['title_or_id'][:20]"><dtml-var authorname></dtml-let></option>
+</dtml-in>
+</select>
+<label>Author 3:</label><select name="author3">
+<option value="">--Select Author--</option>
+<dtml-in expr="website.objectValues(['Blend Person'])">
+      <option value="<dtml-var id>"<dtml-if expr="author3 == id">selected</dtml-if>><dtml-let authorname="_['title_or_id'][:20]"><dtml-var authorname></dtml-let></option>
+
+</dtml-in>
+</select>
+<label>Author 4:</label><select name="author4">
+<option value="">--Select Author--</option>
+<dtml-in expr="website.objectValues(['Blend Person'])">
+      <option value="<dtml-var id>"<dtml-if expr="author4 == id">selected</dtml-if>><dtml-let authorname="_['title_or_id'][:20]"><dtml-var authorname></dtml-let></option>
+</dtml-in>
+</select>
+<label>Author 5:</label><select name="author5">
+<option value="">--Select Author--</option>
+<dtml-in expr="website.objectValues(['Blend Person'])">
+      <option value="<dtml-var id>"<dtml-if expr="author5 == id">selected</dtml-if>><dtml-let authorname="_['title_or_id'][:20]"><dtml-var authorname></dtml-let></option>
+</dtml-in>
+</select>
+	</div>
+</fieldset>
+
+<h3 onClick="expandcontent(this,'sc3')"><span class="showstate"></span>Clusters</h3>
+<fieldset>
+	
+<div id="sc3" class="switchcontent">
+<label for="Primary Image">Select Clusters</label>
+<dtml-in expr="website.objectValues(['Blend Cluster'])" sort="disPos">
+	<br /><input type="checkbox" name="cat" value="<dtml-var id>" <dtml-if expr="id in cat">checked</dtml-if>>
+		<dtml-var title_or_id>
+</dtml-in>
+</div>
+</fieldset>
+
+<h3 style="padding-left:20px;">Body Content</h3>
+<fieldset class="undo">
+<textarea name="data" cols="85" rows="15"><dtml-var data></textarea>
+</fieldset>
+
+<h3 onClick="expandcontent(this,'sc4')"><span class="showstate"></span>Tags</h3>
+<fieldset>
+  <div id="sc4" class="switchcontent">
+    <div id="taggit">
+    <ul id="taglist">
+    <dtml-in globaltags prefix="loop" sort=desc>
+      <li><a href="#"><dtml-var loop_item></a><dtml-unless sequence-end>, </dtml-unless></li>
+    </dtml-in>
+    </ul>
+    </div>
+  	  <div id="selected-tags-container" style="clear:both;"></div>
+  </div>
+</fieldset>
+
+<h3 onClick="expandcontent(this,'sc5')"><span class="showstate"></span>Manage Keywords &amp; Description</h3>
+<fieldset>
+<div id="sc5" class="switchcontent">
+<label for="title">Meta Keywords:</label> <span class="note">To add custom meta data, overwrite global meta data. See Help &amp; Training for additional information.</span>
+<input type="text" name="metakeywords:string" size="85" id="metakeywords" value="<dtml-if metakeywords><dtml-var metakeywords><dtml-else><dtml-in "PARENTS[2:-2]" reverse><dtml-in expr="objectValues(['Blend Site'])"><dtml-var metakeywords></dtml-in></dtml-in></dtml-if>">
+<label for="metadescription">Meta Description:</label><br />
+<textarea name="metadescription:text" cols="64" rows="8" wrap="virtual"><dtml-if metadescription><dtml-var metadescription><dtml-else><dtml-in "PARENTS[2:-2]" reverse><dtml-in expr="objectValues(['Blend Site'])"><dtml-var metadescription></dtml-in></dtml-in></dtml-if></textarea>
+</div>
+</fieldset>
+<p><input type="submit" value="&nbsp;&nbsp;Save&nbsp;&nbsp;" name="manage_editSaveAction:method">&nbsp;&nbsp;<a href="../../articles_html?size=50" style="color:red; font-size:11px;text-decoration:underline;">Cancel</a></p>
+</form>
+<dtml-call "REQUEST.set('freshtags',[])">
+<dtml-let a="_.string.strip(tags)">
+<dtml-let b="_.string.upper(a)">
+  <dtml-let c="_.string.replace(b,'\n','')">
+	  <dtml-let d="_.string.split(c,'\r')">
+			<dtml-call "freshtags.extend(d)">
+	  </dtml-let>
+	</dtml-let>
+</dtml-let>
+</dtml-let>
+<script type="text/javascript">
+  Calendar.setup(
+    {
+      inputField  : "pubdate",     // ID of the input field
+      ifFormat    : "%m/%d/%y",    // the date format
+      button      : "triggerstart",      // ID of the button
+    }
+  );
+</script>
+<script type="text/javascript">
+  Calendar.setup(
+    {
+      inputField  : "expiry",     // ID of the input field
+      ifFormat    : "%m/%d/%y",    // the date format
+      button      : "triggerend",      // ID of the button
+    }
+  );
+</script>
+<script>
+	//function pageLoaded( event ) {
+		var options = { 				
+			field:'hidden-taglist',
+			selectable_tag_list:'taglist',
+			selected_tags_container:'selected-tags-container',
+			remove_text:'X',
+			initial_tags:[<dtml-in freshtags prefix=loop>'<dtml-var loop_item>'<dtml-unless sequence-end>,</dtml-unless></dtml-in>]
+			
+		}
+		var list = new SelectableTagList( options );
+	//}
+	
+	//Event.observe( window , 'load' , pageLoaded );
+</script>
+<dtml-var cms_footer>
+

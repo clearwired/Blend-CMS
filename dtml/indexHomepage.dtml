@@ -1,0 +1,3 @@
+<dtml-var home_html_header>
+<dtml-var data>
+<dtml-var home_html_footer>

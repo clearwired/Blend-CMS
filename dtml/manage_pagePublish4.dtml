@@ -1,0 +1,69 @@
+<dtml-var publish_header>
+<h2>Manage Tertiary Navigation: <dtml-var secid></h2>
+<p style="text-align:right;text-decoration:underline;"><a href="pagePublish2_html">&laquo; Back to Secondary Publishing</a></p>
+<div id="publish_container">
+	<table id="lib" class="data" cellpadding="0" cellspacing="0" border="0" style="margin-bottom:10px;">
+		<tr>
+			<th style="width:50%">Section Title</th>
+			<th>Top</th>
+			<th>Bottom</th>
+			<th>Up One</th>
+			<th>Down One</th>
+			<th>Remove</th>
+		</tr>
+	</table>
+	
+	
+	<dtml-in expr="website.objectValues(['Blend iPage'])" sort=disPos>
+	<dtml-if expr="secid == id">
+	<table id="lib" class="data" cellpadding="0" cellspacing="0" border="0">
+			<tr>
+				<th style="width:90%"><strong><dtml-var title_or_id></strong></th>
+			</tr>
+	</table>
+				<table id="lib" class="data" cellpadding="0" cellspacing="0" border="0" style="margin-bottom:10px;">
+				  <dtml-in "getListItems()" prefix="loop">
+					<dtml-with "_.getitem(_['loop_item'])"><dtml-call "REQUEST.set('idx',id)">
+
+					<dtml-if sequence-even>
+						<tr class="even">
+					<dtml-else>
+						<tr class="odd">
+					</dtml-if>
+				       <td style="width:90%;color: #4C4E45;">&nbsp;&nbsp;&nbsp;<strong><dtml-var title_or_id></strong></td>
+				    </tr>
+				    <tr>
+				    	<td colspan="2">
+							<table class="tertiary" cellpadding="0" cellspacing="0" border="0">
+				    		<dtml-in "getListItems()" prefix="loop">
+								<tr>
+								<dtml-with "_.getitem(_['loop_item'])">
+								   <td style="width:48%"><dtml-var title_or_id></td>
+								   <td class="controls"><a href="<dtml-var loop_item>/doMoveTopPage?id=<dtml-var loop_item>&idx=<dtml-var idx>&lpos:int=<dtml-var loop_index>&secid=<dtml-var secid>"><img src="/misc_/Blend/top"alt="Top"></a></td>
+							       <td class="controls"><a href="<dtml-var loop_item>/doMoveBottomPage?id=<dtml-var loop_item>&idx=<dtml-var idx>&secid=<dtml-var secid>"><img src="/misc_/Blend/bottom" height="16" width="16" border="0" alt="Bottom"></a></td>
+							       <td class="controls"><dtml-if expr="loop_index > 0"><a href="<dtml-var loop_item>/doMoveUpPage?id=<dtml-var loop_item>&idx=<dtml-var idx>&lpos:int=<dtml-var loop_index>&secid=<dtml-var secid>"></dtml-if><img src="/misc_/Blend/up"alt="Up One"></a></td>
+							       <td class="controls"><dtml-if loop_end><img src="/misc_/Blend/down" alt="View Document"><dtml-else><a href="<dtml-var loop_item>/doMoveDownPage?id=<dtml-var loop_item>&idx=<dtml-var idx>&lpos:int=<dtml-var loop_index>&secid=<dtml-var secid>"><img src="/misc_/Blend/down" alt="Down One"></a></dtml-if></td>
+							       <td class="controls"><a href="<dtml-var loop_item>/doRemovePage?id=<dtml-var loop_item>&idx=<dtml-var idx>&secid=<dtml-var secid>"><img src="/misc_/Blend/remove" alt="View Document"></a></td>
+								</dtml-with>
+								</tr>
+							</dtml-in>
+							</table>
+				    	</td>
+				    </tr>
+				  </dtml-with>
+				  </dtml-in>
+				 </table>
+		</dtml-if>
+	</dtml-in>
+	<table id="lib" class="data" cellpadding="0" cellspacing="0" border="0" style="margin-bottom:0;">
+		<tr>
+			<th style="width:50%">Section Title</th>
+			<th>Top</th>
+			<th>Bottom</th>
+			<th>Up One</th>
+			<th>Down One</th>
+			<th>Remove</th>
+		</tr>
+	</table>
+</div>
+<dtml-var cms_footer>

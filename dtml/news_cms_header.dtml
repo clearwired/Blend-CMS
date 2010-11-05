@@ -1,0 +1,57 @@
+<dtml-if "AUTHENTICATED_USER.getUserName() == 'Anonymous User'">
+<dtml-call "RESPONSE.redirect('cms/login')">
+</dtml-if>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+ "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+<head>
+<title>Clearwired CMS</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="Pragma" content="no-cache" />
+<meta http-equiv="Cache-Control" content="no-cache" />
+<link rel="stylesheet" type="text/css" href="/misc_/Blend/cms_styles.css" />
+<script src="/misc_/Blend/scripts.js" type="text/javascript"></script>
+<link rel="stylesheet" type="text/css" media="all" href="/misc_/Blend/calendar-win2k-cold-1.css" title="win2k-cold-1" />
+<script type="text/javascript" src="/misc_/Blend/calendar.js"></script>
+<script type="text/javascript" src="/misc_/Blend/calendar-en.js"></script>
+<script type="text/javascript" src="/misc_/Blend/calendar-setup.js"></script>	
+<body>
+<div id="container">
+<div id="header">
+	<img id="logo" src="/misc_/Blend/blend_logo">
+
+	<div id="utility">
+	<a href="../../cms/setup_html">Setup</a> | 
+	<a href="../../cms/help_html">Help &amp; Training</a> | 
+	<a href="../../cms/login/logged_out">Logout</a>
+	</div>
+	
+	<div id="quick_create">
+	<form name="quickadd" action="<dtml-var absolute_url>/quickadd_html" method="post">
+	<input type="hidden" name="data" value="">
+	<label for="Content">Quick Create:</label>&nbsp;<select name="metatype" id="Meta Type" style="font-weight:normal;">
+					<option value="NA">Choose Type</option>
+					<option value="CMS Homepage">Homepage</option>				
+					<option value="CMS iPage">Index Page</option>
+					<option value="CMS Page">Page</option>
+					<option value="CMS Event">Event</option>
+					<option value="CMS News">News</option>
+					<option value="CMS Promo">Promo</option>												
+	</select>
+	<span><label for="ID">&nbsp;&nbsp;Title: </label>
+	<input type="text" name="id:string" size="15" maxlength="25" value=" Add Title " onFocus="clearDefault(this)" style="font-size:9px; font-weight:normal; font-family: verdana, arial,sans-serif;"> <input type="submit" value="Go" style="font-size:9px;"></span>
+	</form>
+	</div>
+
+	<dtml-call "REQUEST.set('currentpage', _.string.split(URL, '/')[-1])">
+	<ul id="nav">
+	<li<dtml-if expr="currentpage == 'cms'"> class="selected"</dtml-if>><a href="../../cms">BlendCM</a></li>
+	<li<dtml-if expr="currentpage != 'cms' and currentpage != 'mydocs_html' and currentpage != 'users_html'"> class="selected"</dtml-if>><a href="../../content_html">Resource Libraries</a></li>
+	<li<dtml-if expr="currentpage == 'mydocs_html'"> class="selected"</dtml-if>><a href="">Workflow</a></li>
+	<li<dtml-if expr="currentpage == 'users_html'"> class="selected"</dtml-if>><a href="">User Accounts</a></li>
+	<li><a href="cms/website/index_html" target="_blank">View Website</a></li>
+	</ul>
+	<div id="nav_underline"></div>
+</div>
+<div id="content">
+</head>

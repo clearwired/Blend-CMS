@@ -1,0 +1,2 @@
+<dtml-call expr="website.images.manage_delObjects(REQUEST['id'])">
+<dtml-call expr="RESPONSE.redirect('../../images_html?size=50')">

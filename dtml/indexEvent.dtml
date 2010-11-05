@@ -1,0 +1,30 @@
+<dtml-call "REQUEST.set('page','ispage')">
+<dtml-if expr="_.has_key('template') is False">
+        <dtml-call "_.template == 'default'">
+</dtml-if>
+<dtml-with website>
+        <dtml-with templates>
+                <dtml-call "REQUEST.set('header_html', _.getitem('header_'+template))">
+                <dtml-call "REQUEST.set('footer_html', _.getitem('footer_'+template))">
+        </dtml-with>
+</dtml-with>
+<dtml-var header_html>
+<div class="item">
+	<h1><dtml-var title></h1>
+	<h2><dtml-var subtitle></h2>
+	<h3><dtml-var abstract></h3>
+<p class="eventtime">
+<strong>Event Start:</strong>
+    <dtml-var estart fmt=pCommon>
+<br />
+<strong>Event End:</strong>
+   <dtml-var eend fmt=pCommon>
+</p>
+<p class="eventcontact"><strong>Contact:</strong> <a href="mailto:<dtml-var contactemail>"><dtml-var contactname></a><br /><strong>Telephone:</strong> <dtml-var contactphone></p>
+<dtml-if data>
+<h2>Event Details</h2>
+<p class="eventdescription"><dtml-var data></p>
+</dtml-if>
+</div>
+<dtml-var footer_html>
+

@@ -1,0 +1,45 @@
+<dtml-var cms_edit_header>
+<script type="text/javascript" charset="utf-8">
+/*<![CDATA[*/
+display_error = function (elid, name) {
+	$(elid).className = name;
+}
+validate_form = function () {
+	var no_errors = true;
+
+	if (!isNotEmpty($F('title'))) {
+		no_errors = false;
+		display_error('error_title', 'error');
+	} else {
+		display_error('error_title', '');
+	}
+	if (!no_errors) alert('Please correct the indicated items before continuing.');
+
+	return no_errors;
+}
+/*]]>*/
+</script>
+<h2>News ID: <dtml-var id> <span>created: <dtml-var created></span></h2>
+<form name="form" class="edit" action="." method="post" onsubmit="return validate_form();">
+<input type="hidden" name="created" value="<dtml-var created>">
+<input type="hidden" name="author" value="<dtml-var author>">
+<input type="hidden" name="active" value="<dtml-var active>">
+<fieldset class="top">
+<label id="error_title" for="title">Title</label>
+<input type="text" id="title" class="title" name="title:string" size="30" value="<dtml-var title>">
+</fieldset>
+
+<h3 style="padding-left:20px;">Body</h3>
+<fieldset class="undo">
+<textarea name="data" id="Comments" rows="5" cols="75"/><dtml-var data></textarea>
+</fieldset>
+<h3 onClick="expandcontent(this,'sc1')"><span class="showstate"></span>Tags (one per line)</h3>
+<fieldset>
+<div id="sc1" class="switchcontent">
+	<textarea name="tags" cols="85" rows="5"><dtml-var expr="scrubTags(tags)"></textarea>
+</div>
+</fieldset>
+<p><input type="submit" value="&nbsp;&nbsp;Save&nbsp;&nbsp;" name="manage_editSaveAction:method">&nbsp;&nbsp;<a href="../../adminNews_html?size=50" style="color:red; font-size:11px;text-decoration:underline;">Cancel</a></p>
+</fieldset>
+</form>
+<dtml-var cms_footer>

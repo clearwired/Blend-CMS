@@ -1,0 +1,16 @@
+<dtml-with REQUEST>
+  <dtml-call "REQUEST.set('pageid',id)">
+</dtml-with>
+<!-- if deleting a page, make sure it's not published -->
+<dtml-in expr="website.objectValues(['Blend iPage'])">
+    <dtml-if expr="pageid in container">
+        <dtml-var expr="removeItem(pageid)">
+    </dtml-if>
+</dtml-in>
+<dtml-in expr="website.objectValues(['Blend Page'])">
+    <dtml-if expr="pageid in container">
+        <dtml-var expr="removeItem(pageid)">
+    </dtml-if>
+</dtml-in>
+<dtml-call "manage_delObjects([REQUEST['id']])">
+<dtml-call expr="RESPONSE.redirect(URL3 + '/page_html?size=50')">

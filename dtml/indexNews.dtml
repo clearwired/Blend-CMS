@@ -1,0 +1,22 @@
+<dtml-call "REQUEST.set('page','ispage')">
+<dtml-if expr="_.has_key('template') is False">
+        <dtml-call "_.template == 'default'">
+</dtml-if>
+<dtml-with website>
+        <dtml-with templates>
+                <dtml-call "REQUEST.set('header_html', _.getitem('header_'+template))">
+                <dtml-call "REQUEST.set('footer_html', _.getitem('footer_'+template))">
+        </dtml-with>
+</dtml-with>
+<dtml-var header_html>
+<div class="item">
+<p class="date"><dtml-var newsdate fmt="%B %d, %Y"></p>
+<h1><dtml-var title_or_id></h1>
+<dtml-if subtitle><p class="subtitle"><dtml-var subtitle></p></dtml-if>
+<dtml-if abstract><p class="abstract"><dtml-var abstract></p></dtml-if>
+<p class="body"><dtml-var data></p>
+</div>
+<dtml-var footer_html>
+
+
+

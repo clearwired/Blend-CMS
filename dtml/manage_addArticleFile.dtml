@@ -1,0 +1,59 @@
+<dtml-with REQUEST>
+<dtml-call "REQUEST.set('art_id',id)">
+</dtml-with>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+	<head>
+	<title>Blend CPS</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta http-equiv="Pragma" content="no-cache" />
+	<meta http-equiv="Cache-Control" content="no-cache" />
+	<link rel="stylesheet" type="text/css" href="/misc_/Blend/cms_styles.css" />
+	<script type="text/javascript" src="/misc_/Blend/prototype.js"></script>
+	<script type="text/javascript" src="/misc_/Blend/validation.js"></script>
+	<script type="text/javascript" src="/misc_/Blend/json_request.js"></script>
+	<script type="text/javascript" src="/misc_/Blend/json_status_messages.js"></script>
+	<script type="text/javascript" charset="utf-8">
+	/*<![CDATA[*/
+	display_error = function (elid, name) {
+		$(elid).className = name;
+	}
+	validate_form = function () {
+		var no_errors = true;
+
+		if (!isNotEmpty($F('title'))) {
+			no_errors = false;
+			display_error('error_title', 'error');
+		} else {
+			display_error('error_title', '');
+		}
+		if (!no_errors) alert('Please correct the indicated items before continuing.');
+
+		return no_errors;
+	}
+	/*]]>*/
+	</script>
+</head>
+
+<dtml-let a="_.string.split(art_id,'.')">
+	<dtml-call "REQUEST.set('art_ext', a[0] + '.pdf')">
+</dtml-let>
+<body>
+	<div style="margin:30px 10px 10px 10px; text-align:center;">
+<h2>File Upload</h2>
+<p>Link a file to this article.</p>
+<form name="fileupload"  onsubmit="return validate_form();" class="edit" style="text-align:left; background-color:transparent;" method="POST" action="website/files/addArticleFile" enctype="multipart/form-data">
+<input type="hidden" name="thearticle" value="<dtml-var art_id>">
+<input type="hidden" name="id" value="<dtml-var art_ext>">
+<label id="error_title" for="title">Document Title</label>
+<input type="text" class="uploadtitle" id="title" name="title"><span style="color:#333;">*required</span>
+	
+<label id="error_title" for="title">Local File</label>
+<input type="file" name="file" class="add"><input type="submit" class="add" name="save" value="Upload" />
+</form>
+</div>
+</body>
+</html>

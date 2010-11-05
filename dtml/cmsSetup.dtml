@@ -1,0 +1,16 @@
+<dtml-var cms_header>
+<h2>Blend Metadata Configuration</h2>
+<p>Modify or delete your website meta keywords or meta description.</p>
+<p>Website meta data may be overridden by adding unique meta keywords and meta descriptions per page or index page.</p>
+<form name="metaform" class="edit" action="." method="post">
+<input type="hidden" name="id" value="<dtml-var id>">
+	<h3>Define Global Metadata</h3>
+<fieldset>
+<label for="title">Meta Keywords:</label>
+<input type="text" name="metakeywords:string" size="60" id="metakeywords" value="<dtml-var metakeywords>"/>
+<label for="metadescription">Meta Description:</label>
+<textarea name="metadescription:text" cols="60" rows="8" wrap="virtual"><dtml-var metadescription></textarea>
+<input type="submit" value="Save" name="manage_editSaveSetup:method">
+</fieldset>
+</form>
+<dtml-var cms_footer>

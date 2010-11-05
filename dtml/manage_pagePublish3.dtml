@@ -1,0 +1,63 @@
+<dtml-let x="_.string.replace(URL1,'/',' ')">
+				<dtml-let z="_.string.split(x,' ')">
+					<dtml-let pubobj="z[-1]">
+						<dtml-call "REQUEST.set ('theobj', pubobj)">
+					</dtml-let>
+				</dtml-let>
+</dtml-let>
+<dtml-var publish_header>
+<h2>Publish Page: <dtml-var theobj></h2>
+<p>Check the Section or Page into which you would like to publish this page. You can modify the order of the pages in the next step. You can place a page into multiple Sections by selecting more than one section below. If your site requires more than three levels of navigation, consider using the Cluster object.</p>
+<form name="publish1" action="doPublish2" method="post">
+<input type="hidden" name="pageobj" value="<dtml-var theobj>">
+<div id="publish_container">
+	<table id="lib" class="data" cellpadding="0" cellspacing="0" border="0" style="margin-bottom:10px;">
+			<tr>
+				<th style="width:90%"><strong>Primary/Secondary/Tertiary</strong></th>
+				<th>Publish?</th>
+			</tr>
+	</table>
+<dtml-in expr="website.objectValues(['Blend iPage'])" sort=disPos>
+  <table id="lib" class="data" cellpadding="0" cellspacing="0" border="0">
+    <tr>
+      <th style="width:90%"><strong><dtml-var title_or_id></strong></th>
+      <th><input type="checkbox" name="pubbed:list" value="<dtml-var id>"></th>
+    </tr>
+  </table>
+<dtml-call "REQUEST.set('idx',id)">
+<table id="lib" class="data" cellpadding="0" cellspacing="0" border="0" style="margin-bottom:10px;">
+  <dtml-in "getListItems()" prefix="loop">
+  <dtml-with "_.getitem(_['loop_item'])">
+  <dtml-if sequence-even>
+  <tr class="even">
+    <dtml-else>
+  <tr class="odd">
+    </dtml-if>
+      <td style="width:90%;color: #4C4E45;">&nbsp;&nbsp;&nbsp;<strong><dtml-var title_or_id></strong></td>
+      <td><input type="checkbox" name="subpub:list" value="<dtml-var id>"></td>
+  </tr>
+  <tr>
+  <td colspan="2">
+    <table class="tertiary" cellpadding="0" cellspacing="0" border="0">
+    <dtml-in "getListItems()" prefix="loop">
+    <tr>
+    <dtml-with "_.getitem(_['loop_item'])">
+    <td><dtml-var title_or_id></td>
+    </dtml-with>
+    </tr>
+    <dtml-else>
+    <tr><td colspan="2"></td></tr>
+    </dtml-in>
+    </table>
+  </td>
+  </tr>
+  </dtml-with>
+  </dtml-in>
+</table>
+</dtml-in>
+<p style="text-align:right;margin-top:10px;">
+<input type="submit" name="publish" value=" Next ->">
+</p>
+</form>
+</div>
+<dtml-var cms_footer>

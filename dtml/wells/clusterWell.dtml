@@ -1,0 +1,86 @@
+<dtml-var cms_header>
+<h2>Clusters</h2>
+<p>This resource library contains all of the Clusters that have been added to Blend. Clusters may be added to the resource library but remain unpublished while they are being edited. To add Cluster, enter the Id of the Cluster in the field below and click the Add Cluster button.</p>
+<p>Use Clusters when you want to relate objects that do not need to appear as primary navigation.  See the <a href="help_html">Blend User Manual</a> for additional information about working with Clusters.</p>
+<div id="addcontent">
+<form name="form" action="website/manage_addProduct/Blend/manage_addClusterAction" method="post">
+<input type="text" name="id:string" class="title" value=" Enter Cluster Id " onFocus="clearDefault(this)"><input type="submit" class="add" value=" Add Cluster "></p>
+</form>
+</div>
+<div id="batchwrap">
+  <form name="" action="../blend/clusters_html?size=<dtml-var size>" method="post">
+<dtml-in expr="website.objectValues(['Blend Cluster'])" sort=title_or_id size=size start=start>
+	<dtml-if sequence-start>
+		<dtml-if previous-sequence>
+		<div id="batchlink">&laquo; <a href="<dtml-var sequence-query>start=<dtml-var previous-sequence-start-number>">Prev</a> 
+		<dtml-else>
+		<div id="batchlink">
+		</dtml-if>
+	</dtml-if>
+<dtml-if sequence-end>
+  <dtml-if start><dtml-var start><dtml-else>1</dtml-if> - <dtml-var sequence-number> / <span class="batches"><dtml-let counter="_.len(website.objectValues(['Blend Cluster']))"><dtml-var counter></dtml-let></span>
+	<dtml-if next-sequence>
+	  <a href="../blend/clusters_html?size=<dtml-var size>&start=<dtml-var next-sequence-start-number>" class="ba_link">Next</a> &raquo;</div>
+	<dtml-else>
+	</div>
+	</dtml-if>
+</dtml-if>
+</dtml-in>
+<div id="selectsize">
+ Show
+<select name="size" onchange="this.form.submit();">
+<option value="5"<dtml-if expr="size=='5'"> selected</dtml-if>>  5 
+<option value="10"<dtml-if expr="size=='10'"> selected</dtml-if>> 10 
+<option value="20"<dtml-if expr="size=='20'"> selected</dtml-if>> 20 
+<option value="35"<dtml-if expr="size=='35'"> selected</dtml-if>> 35 
+<option value="50"<dtml-if expr="size=='50'"> selected</dtml-if>> 50 
+<option value="100"<dtml-if expr="size=='100'"> selected</dtml-if>>100 
+</select>
+</div>
+</div>
+</form>
+<table id="lib" class="data sortable" cellpadding="0" cellspacing="0" border="0">
+<tr>
+    <th>Title</th>
+    <th>Modified</th>
+    <th class="controls"><dtml-if "AUTHENTICATED_USER.has_role(['Manager'])">Position</dtml-if></th>      
+    <th class="controls">View</th>    
+    <th class="controls">Edit</th> 
+    <th class="controls"><dtml-if "AUTHENTICATED_USER.has_role(['Manager'])">Active</dtml-if></th>    
+    <th class="controls"><dtml-if "AUTHENTICATED_USER.has_role(['Manager'])">Delete</dtml-if></th>    
+</tr>
+  <dtml-in expr="website.objectValues(['Blend Cluster'])" sort=disPos size=size start=start>
+<form action="website/<dtml-var id>/manage_clusterPosition" method="post">
+<input type="hidden" name="title" value="<dtml-var title>">  
+<input type="hidden" name="created" value="<dtml-var created>">
+<input type="hidden" name="id" value="<dtml-var id>">  
+  <dtml-if sequence-even>
+    <tr class="even">
+   <dtml-else>
+     <tr class="odd">
+    </dtml-if>     
+       <td><a href="website/<dtml-var id>"><dtml-let pagetitle="_['title_or_id'][:30]"><dtml-var pagetitle></dtml-let></a></td>
+       <td><dtml-var "bobobase_modification_time(). toZone(timezone)" fmt="fCommon"></td>
+       <td class="button">
+		<dtml-if "AUTHENTICATED_USER.has_role(['Manager'])">
+       <select name="disPos:int" onchange="submit()">
+       <option value="0"></option>
+       <dtml-let counter="_.len(website.objectValues(['Blend Cluster']))">
+		      <dtml-in expr="_.range(counter)" prefix="loop" >
+		       <option value="<dtml-var loop_item>"<dtml-if expr="loop_item == disPos"> selected</dtml-if>><dtml-var loop_item></option>
+		      </dtml-in>
+	</dtml-let>
+	</select></form>
+	</dtml-if>
+       </td>       
+       <td class="button"><a href="website/<dtml-var id>"><img src="/misc_/Blend/viewit" height="16" width="16" border="0" alt="View Document"></a></td>
+       <td class="button"><a href="website/<dtml-var id>/clusterEditCMS"><img src="/misc_/Blend/edit" height="16" width="16" border="0" alt="Edit Document"></a></td>     
+       <td class="button"><dtml-if "AUTHENTICATED_USER.has_role(['Manager'])"><dtml-var checkPublish></dtml-if></td>       
+       <td class="button"><dtml-if "AUTHENTICATED_USER.has_role(['Manager'])"><a href="website/<dtml-var id>/deleteCluster?id=<dtml-var id>" onClick="return confirmSubmit()"><img src="/misc_/Blend/delete" height="16" width="16" border="0" alt="Delete Cluster"></a></dtml-if></td>
+    </tr>
+</form>    
+  </dtml-in>
+</table>
+<dtml-var cms_footer>
+
+

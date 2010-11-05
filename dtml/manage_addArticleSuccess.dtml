@@ -1,0 +1,35 @@
+<dtml-with REQUEST>
+<dtml-call "REQUEST.set('art_id', id)">
+</dtml-with>
+
+<dtml-let a="_.string.split(art_id,'.')">
+	<dtml-call "REQUEST.set('art_ext', a[0] + '.html')">
+</dtml-let>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+	<head>
+	<title>Blend CPS</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta http-equiv="Pragma" content="no-cache" />
+	<meta http-equiv="Cache-Control" content="no-cache" />
+	<link rel="stylesheet" type="text/css" href="/misc_/Blend/cms_styles.css" />
+	<script type="text/javascript" charset="utf-8">
+	<!--
+	function win(){
+	window.opener.location.href="../../../website/<dtml-var art_ext>/articleEditCMS";
+	self.close();
+	}
+	-->
+</script>
+</head>
+
+<body>
+	<div style="margin:30px 10px 10px 10px; text-align:center;">
+	<h2>File Successfully Uploaded!</h2>
+	<p><input type=button onClick="win();" value="&nbsp; Close Window &nbsp;"></p>
+	</div
+</body>
+</html>

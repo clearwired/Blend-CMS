@@ -1,0 +1,5 @@
+<dtml-if expr="active==0">
+<a href="website/<dtml-var id>/manage_active"><img src="/misc_/Blend/unpublished" height="16" width="16" border="0" alt="Activate News"></a>
+<dtml-elif expr="active==1">
+<a href="website/<dtml-var id>/manage_inactive"><img src="/misc_/Blend/published" height="16" width="16" border="0" alt="Disactivate News"></a>
+</dtml-if>

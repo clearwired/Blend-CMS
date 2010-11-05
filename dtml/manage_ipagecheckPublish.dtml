@@ -1,0 +1,5 @@
+<dtml-if expr="published==0">
+<a href="website/<dtml-var id>/manage_publish"><img src="/misc_/Blend/unpublished" height="16" width="16" border="0" alt="Publish Document"></a>
+<dtml-elif expr="published==1">
+<a href="website/<dtml-var id>/manage_unpublish"><img src="/misc_/Blend/published" height="16" width="16" border="0" alt="Publish Document"></a>
+</dtml-if>

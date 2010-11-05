@@ -1,0 +1,143 @@
+Blend CPS Integration Guide
+
+Dependencies
+- See README.txt
+
+Blend is a content management system that can be integrated with any visual design on the front-end. The basic concept is that a Blend Site object is a container object that contains a directory structure that will contain the other content objects. Content objects are Python classes based on SimpleItem.
+
+The pathnames within Blend follow a consistent directory structure:
+
+/www/site/blend/
+
+Where 'site' is the name of your website. 
+
+Within the 'site' directory, there are a series of files that need to be included for Blend to work properly:
+
+acl_users [SimpleUserFolder] - used in conjunction with MySQL or PostgreSQL to manage user accounts
+blend [Blend Site Object] - only one is required, it should be called blend
+website [folder] - the folder that will contain all site content and will serve as the root of the website
+
+Within the 'website' folder there is a standard directory structure to contain website assets. The directory structure is important as Blend will create files in this structure.
+
+From the root of the ZMI, the directory structure should be:
+
+www
+  site <-- any additional includes or configuration files can go here, promos includes typically go here
+    blend
+    website <-- folder containing all the public site files, all Blend objects will be written to this folder
+      css <-- public site CSS files, they can be called through the templates
+      files <-- folder will hold all uploaded ExtImages
+      images <-- folder will hold all uploaded ExtImages
+        design <-- these are base graphic and image files for the site build, not images that are uploaded through Blend
+      js <- any public site javascripts go here, they can be called through the templates
+      scripts <-- there are two scripts here to delete ExtFiles and ExtImages, these are used by Blend
+      templates <-- contains the default header and footer, any other layout templates can be added here. They must be a matched pair, header and footer.
+      
+
+
+Using VirtualHostMonster, you'll want to point to the 'website' folder as the public site root directory.
+*Global metadata needs to be configured first*
+
+Account SQL
+The following ZSQLMethods need to be created to allow user account management thorough SimpleUserFolder:
+
+sqSelectAccounts
+select * from accounts order by account_lname desc
+
+sqInsertAccount
+
+Arguments:
+account_time
+account_activate_time
+account_type
+fname
+lname
+address
+city
+state
+zip
+email
+phone
+name
+password
+
+INSERT INTO accounts (
+account_time,account_activate_time,account_enabled,account_activated,account_account_type,account_fname,account_lname,account_address,account_city,account_state,account_zip,account_email,account_phone,name,password
+) VALUES (
+<dtml-sqlvar account_time type="string">,
+<dtml-sqlvar account_activate_time type="string">,
+'1',
+'1',
+<dtml-sqlvar account_type type="int">,
+<dtml-sqlvar fname type=string>,
+<dtml-sqlvar lname type=string>,
+<dtml-sqlvar address type=string>,
+<dtml-sqlvar city type=string>,
+<dtml-sqlvar state type=string>,
+<dtml-sqlvar zip type=string>,
+<dtml-sqlvar email type=string>,
+<dtml-sqlvar phone type=string>,
+<dtml-sqlvar name type=string>,
+<dtml-sqlvar password type=string>);
+
+sqDeleteAccount
+
+Arguments:
+account_id
+
+delete from accounts where account_id = <dtml-sqlvar account_id type=int>
+
+sqSelectAccount
+
+Arguments:
+account_id
+
+select * from accounts where account_id = <dtml-sqlvar account_id type="int">
+
+sqUpdateAccount
+
+Arguments:
+account_id
+account_time
+account_activate_time
+account_type
+fname
+lname
+address
+city
+state
+zip
+email
+phone
+name
+password
+
+UPDATE accounts
+SET account_time = <dtml-sqlvar account_time type=string>,
+account_activate_time = <dtml-sqlvar account_activate_time type=string>,
+account_account_type = <dtml-sqlvar account_type type=string>,
+account_enabled = '1',
+account_activated = '1',
+account_fname = <dtml-sqlvar fname type=string>,
+account_lname = <dtml-sqlvar lname type=string>,
+account_address = <dtml-sqlvar address type=string>,
+account_city = <dtml-sqlvar city type=string>,
+account_state = <dtml-sqlvar state type=string>,
+account_zip = <dtml-sqlvar zip type=string>,
+account_email = <dtml-sqlvar email type=string>,
+account_phone = <dtml-sqlvar phone type=string>,
+name = <dtml-sqlvar name type=string>,
+password = <dtml-sqlvar password type=string>
+WHERE account_id = <dtml-sqlvar account_id type=int>
+
+DTML Method
+doAccount
+
+<dtml-call sqInsertAccount>
+<dtml-call "RESPONSE.redirect('users_html')">
+
+DTML Method
+doUpdate
+
+<dtml-call expr="sqUpdateAccount(account_id=account_id,account_time=account_time,account_activate_time=account_activate_time,account_type=account_type,fname=fname,lname=lname,address=address,city=city,state=state,zip=zip,email=email,phone=phone,name=name,password=password)">
+<dtml-call "RESPONSE.redirect('users_html')">

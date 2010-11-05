@@ -1,0 +1,26 @@
+<dtml-var news_header>
+<dtml-if images>
+<dtml-else>
+<dtml-call expr="manage_addOrderedFolder(id='images')">
+</dtml-if>
+<dtml-if files>
+<dtml-else>
+<dtml-call expr="manage_addOrderedFolder(id='files')">
+</dtml-if>
+<div id="cmshome">
+<h1>Web Manager's News</h1>
+<h3 style="margin-bottom: 0px;"><dtml-var title_or_id><span class="buttonEdit"><a href="<dtml-var absolute_url>/adminNewsEditCMS"></a></span></h3>
+<p><span style="font-size:10px;"><strong><dtml-var created></strong><br /><em>-<dtml-var author></em></p>
+<p style="margin-top:0px;"><dtml-var data></p>
+<p style="padding-bottom: 450px;"></p>
+</div>
+<div id="cmsnews"><h4>Web Manager's News <span class="newsEdit"> <a href="../adminNews_html" style="text-decoration:n
+one; background-color: #666; border-bottom: 0;"></a></span></h4>
+<dtml-in expr="website.objectValues(['CMS Admin News'])" sort=bobobase_modification_time reverse>
+<dtml-if expr="active==1">
+<p><strong><span style="font-size:10px;"><dtml-var created></span></strong><br /><a href="../<dtml-var id>"><dtml-var title_or_id></a>
+<em>by:<dtml-var author></em><br /><br /></p>
+</dtml-if>
+</dtml-in>
+</div>
+<dtml-var cms_footer>

@@ -1,0 +1,55 @@
+<dtml-with REQUEST>
+<dtml-call "REQUEST.set('person_id',id)">
+</dtml-with>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+	<head>
+	<title>Blend CPS</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta http-equiv="Pragma" content="no-cache" />
+	<meta http-equiv="Cache-Control" content="no-cache" />
+	<link rel="stylesheet" type="text/css" href="/misc_/Blend/cms_styles.css" />
+	<script type="text/javascript" src="/misc_/Blend/prototype.js"></script>
+	<script type="text/javascript" src="/misc_/Blend/validation.js"></script>
+	<script type="text/javascript" src="/misc_/Blend/json_request.js"></script>
+	<script type="text/javascript" src="/misc_/Blend/json_status_messages.js"></script>
+	<script type="text/javascript" charset="utf-8">
+	/*<![CDATA[*/
+	display_error = function (elid, name) {
+		$(elid).className = name;
+	}
+	validate_form = function () {
+		var no_errors = true;
+
+		if (!isNotEmpty($F('title'))) {
+			no_errors = false;
+			display_error('error_title', 'error');
+		} else {
+			display_error('error_title', '');
+		}
+		if (!no_errors) alert('Please correct the indicated items before continuing.');
+
+		return no_errors;
+	}
+	/*]]>*/
+	</script>
+</head>
+<body>
+	<div style="margin:30px 10px 10px 10px; text-align:center;">
+<h2>Photo Upload</h2>
+<p>Add a photo for this person.</p>
+<form name="imageupload" onsubmit="return validate_form();" method="POST" class="edit" style="text-align:left; background-color:transparent;" action="website/images/addPersonImage" enctype="multipart/form-data">
+<input type="hidden" name="theperson" value="<dtml-var person_id>">
+<input type="hidden" name="id" value="<dtml-var person_id>">
+
+<label id="error_title" for="title">Image Title</label>
+<input type="text"  class="uploadtitle" id="title" name="title"><span>*required</span>
+<label id="error_file" for="file">Local File</label>
+<input type="file" name="file" class="add"><input type="submit" class="add" name="save" value="Upload" />
+</form>
+</div>
+</body>
+</html>

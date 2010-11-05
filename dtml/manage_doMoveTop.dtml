@@ -1,0 +1,19 @@
+<dtml-with idx>
+<dtml-with REQUEST>
+<dtml-call "REQUEST.set('thepageid',id)">
+<dtml-call "REQUEST.set('thepos',lpos)">
+</dtml-with>
+<dtml-in expr="website.objectValues(['Blend iPage'])">
+<dtml-if expr="idx == id">
+<dtml-let counter="_.len(getListItems())">
+<dtml-in expr="_.range(counter)" prefix="num">
+<dtml-if expr="thepos==num_item">
+<dtml-var thepos>
+<dtml-var "moveItemTop(thepos)">
+<dtml-call "RESPONSE.redirect('../pagePublish2_html')">
+</dtml-if>
+</dtml-in>
+</dtml-let>
+</dtml-if>
+</dtml-in>
+</dtml-with>
