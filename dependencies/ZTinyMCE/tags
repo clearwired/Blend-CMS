@@ -1,0 +1,56 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.7	//
+ConfigurationError	Utils.py	/^class ConfigurationError(Exception):$/;"	c
+PUT	Configuration.py	/^    def PUT(self, REQUEST, RESPONSE):$/;"	m	class:TinyMCEConfiguration
+TinyMCE	TinyMCE.py	/^class TinyMCE(Folder):$/;"	c
+TinyMCEConfiguration	Configuration.py	/^class TinyMCEConfiguration(SimpleItem):$/;"	c
+Update	TinyMCE.py	/^    def Update(self, clean=False, REQUEST=None):$/;"	m	class:TinyMCE
+ValidConfiguration	Utils.py	/^def ValidConfiguration(configstring, be_angry=False):$/;"	f
+__call__	Configuration.py	/^    def __call__(self, **kw):$/;"	m	class:TinyMCEConfiguration	file:
+__init__	Configuration.py	/^    def __init__(self, id, title='', configuration='', optimize=False,$/;"	m	class:TinyMCEConfiguration
+__init__	TinyMCE.py	/^    def __init__(self, id, title=''):$/;"	m	class:TinyMCE
+__str__	Configuration.py	/^    def __str__(self, **kw):$/;"	m	class:TinyMCEConfiguration	file:
+_getTinyMCEInstance	Configuration.py	/^    def _getTinyMCEInstance(self):$/;"	m	class:TinyMCEConfiguration
+_gzipText	TinyMCE.py	/^def _gzipText(content):$/;"	f
+_updateLastUpdateDate	TinyMCE.py	/^    def _updateLastUpdateDate(self):$/;"	m	class:TinyMCE
+_updateZipefileUsed	TinyMCE.py	/^    def _updateZipefileUsed(self):$/;"	m	class:TinyMCE
+_uploadCSSDTMLDocument	TinyMCE.py	/^    def _uploadCSSDTMLDocument(self, container, filename, data):$/;"	m	class:TinyMCE
+_uploadDTMLDocument	TinyMCE.py	/^    def _uploadDTMLDocument(self, container, filename, content):$/;"	m	class:TinyMCE
+_uploadFileGzipped	TinyMCE.py	/^    def _uploadFileGzipped(self, container, filename, data, content_type=None):$/;"	m	class:TinyMCE
+_uploadHTMLDTMLDocument	TinyMCE.py	/^    def _uploadHTMLDTMLDocument(self, container, filename, data):$/;"	m	class:TinyMCE
+_uploadImage	TinyMCE.py	/^    def _uploadImage(self, container, filename, data):$/;"	m	class:TinyMCE
+_uploadInto	TinyMCE.py	/^    def _uploadInto(self, os_folderpath, zope_container, clean=False, $/;"	m	class:TinyMCE
+_uploadJavaScriptDTMLDocument	TinyMCE.py	/^    def _uploadJavaScriptDTMLDocument(self, container, filename, data):$/;"	m	class:TinyMCE
+addTemplates2Class	TemplateAdder.py	/^def addTemplates2Class(Class, templates, extension=None, optimize=None, Globals=globals()):$/;"	f
+anyTrue	Utils.py	/^def anyTrue(pred, seq):$/;"	f
+canUpgradeClean	TinyMCE.py	/^    def canUpgradeClean(self):$/;"	m	class:TinyMCE
+debug	Utils.py	/^def debug(s, tabs=0, steps=(1,), f=False):$/;"	f
+doCache	TinyMCE.py	/^    def doCache(self, hours=10):$/;"	m	class:TinyMCE
+doDebug	TinyMCE.py	/^    def doDebug(self):$/;"	m	class:TinyMCE
+doOptimize	Configuration.py	/^    def doOptimize(self):$/;"	m	class:TinyMCEConfiguration
+extract	Utils.py	/^def extract( filename, dir ):$/;"	f
+getConfiguration	Configuration.py	/^    def getConfiguration(self):$/;"	m	class:TinyMCEConfiguration
+getEnvBool	Constants.py	/^def getEnvBool(key, default):$/;"	f
+getEnvInt	Constants.py	/^def getEnvInt(key, default):$/;"	f
+getEnvStr	Constants.py	/^def getEnvStr(key, default):$/;"	f
+getId	Configuration.py	/^    def getId(self):$/;"	m	class:TinyMCEConfiguration
+getId	TinyMCE.py	/^    def getId(self):$/;"	m	class:TinyMCE
+getTitle	Configuration.py	/^    def getTitle(self):$/;"	m	class:TinyMCEConfiguration
+getTitle	TinyMCE.py	/^    def getTitle(self):$/;"	m	class:TinyMCE
+getVersion	TinyMCE.py	/^    def getVersion(self):$/;"	m	class:TinyMCE
+get_size	Configuration.py	/^    def get_size(self):$/;"	m	class:TinyMCEConfiguration
+initialize	__init__.py	/^def initialize(context):$/;"	f
+manage_FTPget	Configuration.py	/^    def manage_FTPget(self, REQUEST, RESPONSE):$/;"	m	class:TinyMCEConfiguration
+manage_addZTinyConfiguration	Configuration.py	/^def manage_addZTinyConfiguration(dispatcher, id, configuration, optimize=False,$/;"	f
+manage_addZTinyMCE	TinyMCE.py	/^def manage_addZTinyMCE(dispatcher, id, title='', REQUEST=None):$/;"	f
+manage_findZTinyMCEInstances	Configuration.py	/^def manage_findZTinyMCEInstances(self, return_nearest=False):$/;"	f
+manage_saveConfiguration	Configuration.py	/^    def manage_saveConfiguration(self, configuration, title,$/;"	m	class:TinyMCEConfiguration
+niceboolean	Utils.py	/^def niceboolean(value):$/;"	f
+render	Configuration.py	/^    def render(self, **kwargs):$/;"	m	class:TinyMCEConfiguration
+tidyline	Configuration.py	/^        def tidyline(x):$/;"	f	function:TinyMCEConfiguration.manage_saveConfiguration
+useGZip	TinyMCE.py	/^    def useGZip(self):$/;"	m	class:TinyMCE
+useOnblurOnfocusHack	Configuration.py	/^    def useOnblurOnfocusHack(self):$/;"	m	class:TinyMCEConfiguration

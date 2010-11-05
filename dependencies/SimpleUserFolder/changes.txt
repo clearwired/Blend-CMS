@@ -1,0 +1,112 @@
+Change & Credit Log
+
+  Version 1.1.2
+
+    - Fixed some deprecation warnings with Zope 2.8 and 2.9
+
+    - Quietened log output while running tests in Zope 2.8 and above.
+
+    - Fixed bug in handling of ZSQL methods which returned uppercase
+      column names.
+
+    - Tested with Zope 2.7, 2.8 and 2.9
+
+    Credits
+   
+      Chris Withers       -- Development work and improved
+                             documentation.
+
+      Gerhard Wannemacher -- Patch to cater for ZSQL methods which
+                             return uppercase column names.
+
+  Version 1.1.1
+
+    - Fixed bug that prevented new Simple User Folder instances
+      registering with the security machinery.
+
+    - Improvements to the testing framework to cater for encrypted
+      passwords and user folders that don't want to support arbitary
+      extra attributes for their users.
+
+    - Compatible with Zope 2.7. These changes were purely to the 
+      testing framework.
+
+    Credits
+   
+      Chris Withers -- Development work.
+
+  Version 1.1.0
+
+    - Added the ability to give users extra attributes.
+      These are accessed by supplying them in
+      getUserDetails and then using the user's __getitem__
+      interface.
+
+    - Changed case of NAME, PASSWORD and ROLE to
+      name, password and role for Z SQL implementations
+
+    - Made Simple User Folder instances ObjectManagers.
+      This means configuration methods can now be put in
+      the Simpler User Folder, rather than the 
+      Simple User Folder's container
+
+    - Renamed 'getUserNames' configuration method to
+      'getUserIds' to avoid a name clash brought on
+      by the addition of ObjectManager functionality
+
+    - Catered for getUserDetails raising an exception or 
+      returning rubbish in a graceful way
+
+    - Documented and tested for the case where editUser is 
+      called with a password of None
+
+    - Enabled UsageBase class to test implementations that
+      stored encrypted passwords
+
+    - Tidied up tests, SQL tests in particular
+
+    Credits
+   
+      Chris Withers -- Development work.
+
+  Version 0.9.0
+
+    - Improved documentation
+
+    - Corrected security declaration for getUserNames
+
+    - Added getUsers method
+
+    Credits
+
+      Chris Withers   -- Development work and improved
+                         documentation. Also documented one way
+                         encyption usage.
+
+      Charlie Reiman  -- Reported typo in security declaration for
+                         getUserNames.
+
+      Olivier Deckmyn -- Pointed out documentation that needed 
+                         clarifying.  
+      
+      Stefan Holek    -- Suggested the implementation of the getUsers
+                         method.
+
+  Version 0.8.0
+
+    Initial release
+
+    Credits
+    
+      Chris Withers -- Development work.
+
+Stuff still to be done:
+
+  - Support for authenticate method
+  - Support for authorisation?
+  - Support for computed local roles.
+  - Documentation of caching of method results.
+  - Examples for how to use
+  - Provide HTML documentation?
+    
+                
